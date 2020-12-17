@@ -28,7 +28,7 @@
  }
 
  .main-header {
-     margin-top: 30px;
+     margin-top: 100px;
      background-color: rgb(245, 234, 221) !important;
      color: rgb(124, 91, 53);
      border-radius: 7px;
@@ -48,7 +48,8 @@
      border-radius: 7px !important;
 
  }
- .basic-btn{
+
+ .basic-btn {
      position: absolute;
      top: 36%;
      left: 0;
@@ -66,7 +67,7 @@
      transform: rotate(-180deg);
      text-orientation: sideways;
      left: 30%;
-     bottom: -200px;
+     bottom: -90px;
      width: 100vh;
      height: 40px;
      font-size: 120px;
@@ -105,19 +106,23 @@
      height: 150px;
 
  }
- .itc{
+
+ .itc {
      position: absolute;
      color: rgb(230, 126, 7);
  }
- .logo-nav{
-  width: 40px; 
-  position: absolute;
-  right: 160px;  
+
+ .logo-nav {
+     width: 40px;
+     position: absolute;
+     right: 160px;
  }
-.banner-nav{
-    position: absolute;
-    right: 50px;
-}
+
+ .banner-nav {
+     position: absolute;
+     right: 50px;
+ }
+
  .banner-txt {
      position: absolute;
  }
@@ -190,21 +195,95 @@
      background-color: rgb(245, 234, 221) !important;
  }
 
- .search-div{
+ .search-div {
      position: absolute;
      width: 40%;
      border-radius: 7px !important;
      top: 20%;
      left: 30%;
  }
- .form-adv{
+
+ .form-adv {
      position: absolute;
      width: 100%;
      left: 0;
  }
-.accordion{
-    background-color: chocolate !important;
-    border-radius: 20px !important;
-    opacity: 92%;
-    max-height: 350px !important;
-}
+
+ .accordion {
+     background-color: chocolate !important;
+     border-radius: 20px !important;
+     opacity: 92%;
+     max-height: 350px !important;
+ }
+
+ .my-modal {
+     padding-top: 40px;
+     background-color: chocolate;
+     position: absolute;
+     top: 10%;
+     left: 16%;
+     width: 70%;
+     height: 80%;
+     display: block;
+     margin-left: auto;
+     margin-right: auto;
+     opacity: 72%;
+     color: white;
+ }
+
+ /* Pets */
+
+ .tab-pets {
+     position: relative;
+     background-color: chocolate;
+     width: 100%;
+     height: 100% !important;
+     left: 0%;
+     opacity: 90%;
+     color: rgb(97, 9, 21) !important;
+     margin-top: 0px;
+ }
+
+ .tab-pets>a {
+     color: white !important;
+     background-color: rgb(95, 41, 10) !important;
+ }
+
+ .tab-pets>a:active {
+     background-color: teal !important;
+     color: white !important;
+ }
+
+ .tab-item {
+     position: absolute;
+     background-color: rgb(95, 41, 10);
+     opacity: 90%;
+     width: 100%;
+     height: 100%;
+     color: white;
+     left: 0%;
+     padding: 150px;
+ }
+
+ .pet-page {
+     background-color: rgb(245, 234, 221);
+     color: rgb(95, 41, 10);
+     margin-bottom: 0;
+ }
+
+ .pet-status button {
+     display: block;
+     margin-bottom: 20px;
+ }
+
+ /* Admin */
+ .admin-prof {
+     position: absolute;
+     height: 60%;
+     left: 22%;
+ }
+
+ .admin-link {
+     position: absolute;
+     top: 13%;
+ }

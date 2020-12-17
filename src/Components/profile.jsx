@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { Alert, Button, Container, Form, FormControl, Col, Row, Navbar, Nav, } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css'
+import '../App.css';
 
 function Profile() {
     return (

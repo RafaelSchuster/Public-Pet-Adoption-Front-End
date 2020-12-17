@@ -10,9 +10,11 @@ import {
 import Profile from './Components/profile';
 import NavBar from './Components/navbar';
 import MyPets from './Components/mypets';
-import Pets from './Components/Pets';
+import Pets from './Components/pets';
 import Search from './Components/search';
 import SearchResults from './Components/searchresults';
+import AdminForm from './Components/adminform';
+import AdminDashboard from './Components/admindash';
 
 function App() {
   return (
@@ -39,19 +41,31 @@ function App() {
       <Switch>
         <Route path="/pets">
           <NavBar />
-          <Pets/>
+          <Pets />
         </Route>
       </Switch>
       <Switch>
         <Route path="/search">
           <NavBar />
-          <Search/>
+          <Search />
         </Route>
       </Switch>
       <Switch>
         <Route path="/searchresults">
           <NavBar />
-          <SearchResults/>
+          <SearchResults />
+        </Route>
+      </Switch>
+      <Switch>
+        <Route path="/admin">
+          <NavBar />
+          <AdminForm />
+        </Route>
+      </Switch>
+      <Switch>
+        <Route path="/admindashboard">
+          <NavBar />
+          <AdminDashboard />
         </Route>
       </Switch>
     </Router>

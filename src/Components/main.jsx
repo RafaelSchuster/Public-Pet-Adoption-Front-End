@@ -2,19 +2,21 @@ import React from 'react';
 import { Button, Form, FormControl, Card, Image } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import logo from '../images/logo.png'
+import logo from '../images/logo.png';
+import NavBar from './navbar';
 
 function Main() {
     return (
         <>
         <div className='main-div'>
+        <NavBar/>
             <h1 className="main-header mb-5"> Welcome First Last </h1>
             <Form className="form-hp">
                 <FormControl
                     as="textarea"
                     className="form-control form-hp "
                     id=''
-                    rows={2}
+                    rows={1}
                     placeholder='Search Pets...'>
                 </FormControl>
                 <a href="/searchresults" className="btn btn-warning w-100" >Basic Search</a>

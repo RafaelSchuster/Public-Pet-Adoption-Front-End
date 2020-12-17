@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Card, CardDeck, Container, CardImg, CardImage, Image, Img, Button } from 'react-bootstrap';
 import Modal from 'react-modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css'
-import image1 from "../images/dog.jpg"
-import image2 from "../images/cat.jpg"
-import image3 from "../images/giraffe.jpg"
+import '../App.css';
+import image1 from "../images/dog.jpg";
+import image2 from "../images/cat.jpg";
+import image3 from "../images/giraffe.jpg";
 
 function MyPets() {
-    const [modalIsOpen1, setModalIsOpen1] = useState(false)
-    const [modalIsOpen2, setModalIsOpen2] = useState(false)
-    const [modalIsOpen3, setModalIsOpen3] = useState(false)
+    const [modalIsOpen1, setModalIsOpen1] = useState(false);
+    const [modalIsOpen2, setModalIsOpen2] = useState(false);
+    const [modalIsOpen3, setModalIsOpen3] = useState(false);
 
     return (
         <>
@@ -34,20 +34,7 @@ function MyPets() {
                             <small className="text-muted">Last updated 3 mins ago</small>
                         </Card.Footer>
                         <Button type="button" variant="warning" onClick={() => setModalIsOpen1(true)}>See More</Button>
-                        <Modal style={
-                            {
-                                overlay: { backgroundImage: { image3 } },
-                                content: {
-                                    color: 'rgb(4, 5, 19)',
-                                    top: '100px',
-                                    width: '50%',
-                                    height: '70%',
-                                    display: 'block',
-                                    marginLeft: 'auto',
-                                    marginRight: 'auto'
-                                }
-                            }
-                        }
+                        <Modal className="my-modal"
                             isOpen={modalIsOpen1}
                             onRequestClose={() => setModalIsOpen1(false)}
                         >
@@ -66,20 +53,7 @@ function MyPets() {
                             <small className="text-muted">Last updated 3 mins ago</small>
                         </Card.Footer>
                         <Button type="button" variant="warning" onClick={() => setModalIsOpen2(true)}>See More</Button>
-                        <Modal style={
-                            {
-                                overlay: { backgroundImage: { image3 } },
-                                content: {
-                                    color: 'rgb(4, 5, 19)',
-                                    top: '100px',
-                                    width: '50%',
-                                    height: '70%',
-                                    display: 'block',
-                                    marginLeft: 'auto',
-                                    marginRight: 'auto'
-                                }
-                            }
-                        }
+                        <Modal className="my-modal"
                             isOpen={modalIsOpen2}
                             onRequestClose={() => setModalIsOpen2(false)}
                         >
@@ -98,25 +72,11 @@ function MyPets() {
                             <small className="text-muted">Last updated 3 mins ago</small>
                         </Card.Footer>
                         <Button type="button" variant="warning" onClick={() => setModalIsOpen3(true)}>See More</Button>
-                        <Modal style={
-                            {
-                                overlay: { backgroundImage: { image3 } },
-                                content: {
-                                    color: 'rgb(4, 5, 19)',
-                                    top: '100px',
-                                    width: '50%',
-                                    height: '70%',
-                                    display: 'block',
-                                    marginLeft: 'auto',
-                                    marginRight: 'auto'
-                                }
-                            }
-                        }
+                        <Modal className="my-modal"
                             isOpen={modalIsOpen3}
                             onRequestClose={() => setModalIsOpen3(false)}
                         >
                             <h1 className="text-center">More Info About Your Pet</h1>
-
                         </Modal>
                     </Card>
                 </CardDeck>
