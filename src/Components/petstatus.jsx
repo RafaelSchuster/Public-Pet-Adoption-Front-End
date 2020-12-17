@@ -1,6 +1,5 @@
 import { Card, Nav, Button, Tabs, Tab } from 'react-bootstrap';
-import React from 'react'ף
-
+import React from 'react';
 function PetStatus() {
     return (
         <div>
