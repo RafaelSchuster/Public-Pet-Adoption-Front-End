@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import { Accordion, Card, useAccordionToggle, Button, Form, FormControl, Image, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css'
+import '../App.css';
 
 const AccordionContext = React.createContext({});
 
@@ -43,9 +43,8 @@ function Toggle() {
                                 rows={2}
                                 placeholder='Search Pets By Type...'>
                             </FormControl>
-                            <Button className="w-100 basic-btn" variant='danger' >Basic Search By Type</Button>
+                            <a href='/searchresults' className="btn btn-success w-100 basic-btn" variant='danger' >Basic Search By Type</a>
                         </Form>
-
                     </Card.Body>
                 </Accordion.Collapse>
             </Card>
@@ -81,7 +80,7 @@ function Toggle() {
                                     </Form.Group>
                                 </Col>
                             </Form.Row>
-                            <Button className="w-100 mt-2" variant="danger" type="submit">
+                            <Button className="w-100 mt-2" variant="success" type="submit">
                                 Advanced Search
                             </Button>
                         </Form>

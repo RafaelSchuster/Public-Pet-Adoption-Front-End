@@ -3,18 +3,10 @@ import { Alert, Button, Container, Form, FormControl, Col, Row, Navbar, Nav, } f
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 
-function AdminForm() {
+function Edit() {
     return (
         <div>
-            <h1 className="header-admin mb-5"> Admin Pet's Upload Form</h1>
-            <a
-                href="/admindashboard"
-                className="btn btn-success w-100 admin-link"
-                variant="warning"
-                type="submit"
-            >
-                Click Here To Admin's Dashboard
-            </a>
+            <h1 className="header-admin mb-5"> Admin's Pet Edit </h1>
             <Container className="container-profile admin-prof">
                 <Form>
                     <Form.Row>
@@ -78,7 +70,7 @@ function AdminForm() {
                         <Form.Control as="textarea" rows={3} placeholder="Pet's Bio" />
                     </Form.Group>
                     <Button className="w-100 mt-2" variant="warning" type="submit">
-                        Submit
+                        Save Edit
                     </Button>
                 </Form>
             </Container>
@@ -86,4 +78,4 @@ function AdminForm() {
     )
 
 }
-export default AdminForm;
+export default Edit;

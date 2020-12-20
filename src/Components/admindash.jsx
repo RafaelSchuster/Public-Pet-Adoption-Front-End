@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { Card, Nav, Button, Tabs, Tab } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import PetProfile from './petprofile';
-import PetStatus from './petstatus';
+import UsersList from './userlist';
+import PetsList from './petslist';
 
 function AdminDashboard() {
     const [key, setKey] = useState('home');
@@ -16,8 +16,10 @@ function AdminDashboard() {
                 onSelect={(k) => setKey(k)}
             >
                 <Tab eventKey="home" title="All Users" className="tab-item" >
+                    <UsersList />
                 </Tab>
                 <Tab eventKey="profile" title="All Pets" className="tab-item pet-status">
+                    <PetsList />
                 </Tab>
             </Tabs>
         </div>

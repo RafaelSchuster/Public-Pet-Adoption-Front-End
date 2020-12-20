@@ -16,9 +16,9 @@ function NavBar() {
                     <img src={logo2} alt="" className="logo-nav" />
                     <span
                         className="banner-nav"
-                    >RentaPet
+                    >Renta
                     <span className="itc"
-                        >ITC
+                        >PET
                     </span>
                     </span>
                 </div>
