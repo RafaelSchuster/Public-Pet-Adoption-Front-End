@@ -25,18 +25,14 @@ function App() {
   const [newUser, setNewUser] = useState();
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
+  const [email, setEmail] = useState();
+  const [telephone, setTelephone] = useState();
+  const [bio, setBio] = useState();
+  const [password, setPassword] = useState()
   const [fostered, setFostered] = useState(false);
   const [adopted, setAdopted] = useState(false);
   const [userPetStatus, setUserPetStatus] = useState();
   const [allPets, setAllPets] = useState();
-
-  const mockUsers = [{
-    name: 'Jack'
-  }, {
-    name: 'Sarah'
-  },
-  { name: 'Pinkatch' }];
-
 
   const mockPets = [
     {
@@ -60,15 +56,26 @@ function App() {
       adopted: true
     }];
 
+  const getUserApi = async () => {
+    const response = await fetch('http://localhost:5000/user')
+    const body = await response.json()
+    if (response.status !== 200) throw Error(body.message)
+    return body
+  }
+
   useEffect(() => {
-    setFirstName('Rafael');
-    setLastName('Schuster');
+
+    getUserApi()
+      .then(res => {
+        setFirstName(res.firstName)
+        setLastName(res.lastName)
+      })
+      .catch(err => console.log(err))
     setUserPetStatus(7);
     setPets(mockPets);
     setAllPets(mockPets);
     setAdopted(true);
     setFostered(false);
-    setUsers(mockUsers);
   }, [])
 
   return (
@@ -79,7 +86,10 @@ function App() {
       firstName, setFirstName,
       lastName, setLastName,
       fostered, adopted, userPetStatus,
-      allPets
+      email, setEmail,
+      telephone, setTelephone,
+      allPets, setAllPets,
+      password, setPassword
     }}>
       <Router>
         <Switch>

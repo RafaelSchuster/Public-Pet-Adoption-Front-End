@@ -10,13 +10,12 @@ import { useState } from 'react';
 function Profile() {
     const { newUser, setNewUser } = useContext(MainContext);
     const { users, setUsers } = useContext(MainContext);
-    const [firstName, setFirstName] = useState();
-    const [lastName, setLastName] = useState();
-    const [email, setEmail] = useState();
-    const [telephone, setTelephone] = useState();
-    const [password, setPassword] = useState();
-    const [bio, setBio] = useState();
-
+    const{firstName, setFirstName} = useContext(MainContext)
+    const{lastName, setLastName} = useContext(MainContext)
+    const{email, setEmail} = useContext(MainContext)
+    const{telephone, setTelephone} = useContext(MainContext)
+    const{bio, setBio} = useContext(MainContext)
+    const{password, setPassword} = useContext(MainContext)
 
     const changeFs = (e) => {
         setFirstName(e.target.value);
@@ -39,10 +38,9 @@ function Profile() {
         setBio(e.target.value);
     }
 
-
-    const submitprofile = (e) => {
+    const submitprofile = async (e) => {
         e.preventDefault();
-        const newUser = {
+        const newUserData = {
             firstName: firstName,
             lastName: lastName,
             telephone: telephone,
@@ -50,10 +48,19 @@ function Profile() {
             password: password,
             bio: bio
         }
-        if (newUser) {
-            setNewUser(newUser);
+        if (newUserData) {
+            setNewUser(newUserData);
             setUsers([...users, newUser]);
         }
+        const response = await fetch('http://localhost:5000/user', {
+            method:'POST',
+            headers:{
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify({post : newUserData}),
+        })
+        const body = await response.text();
+        console.log(body)  
     }
 
     return (
