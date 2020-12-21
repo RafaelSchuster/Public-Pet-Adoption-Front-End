@@ -16,7 +16,7 @@ import SearchResults from './Components/searchresults';
 import AdminForm from './Components/adminform';
 import AdminDashboard from './Components/admindash';
 import { MainContext } from './Context/context';
-import Login from './Components/login'
+import Login from './Components/login';
 import Edit from './Components/edit';
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
   const [email, setEmail] = useState();
   const [telephone, setTelephone] = useState();
   const [bio, setBio] = useState();
-  const [password, setPassword] = useState()
+  const [password, setPassword] = useState();
   const [fostered, setFostered] = useState(false);
   const [adopted, setAdopted] = useState(false);
   const [userPetStatus, setUserPetStatus] = useState();
@@ -57,20 +57,19 @@ function App() {
     }];
 
   const getUserApi = async () => {
-    const response = await fetch('http://localhost:5000/user')
-    const body = await response.json()
-    if (response.status !== 200) throw Error(body.message)
-    return body
+    const response = await fetch('http://localhost:5000/user');
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
   }
 
   useEffect(() => {
-
     getUserApi()
       .then(res => {
-        setFirstName(res.firstName)
-        setLastName(res.lastName)
+        setFirstName(res.firstName);
+        setLastName(res.lastName);
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
     setUserPetStatus(7);
     setPets(mockPets);
     setAllPets(mockPets);
