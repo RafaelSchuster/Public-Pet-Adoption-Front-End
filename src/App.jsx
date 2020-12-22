@@ -23,6 +23,7 @@ function App() {
   const [pets, setPets] = useState();
   const [users, setUsers] = useState([]);
   const [newUser, setNewUser] = useState();
+  const [currentUser, setCurrentUser] = useState()
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
@@ -34,61 +35,44 @@ function App() {
   const [userPetStatus, setUserPetStatus] = useState();
   const [allPets, setAllPets] = useState();
 
-  const mockPets = [
-    {
-      name: 'Toddy',
-      fostered: true,
-      type: 'dog'
-    },
-
-    {
-      name: 'Tilly',
-      adopted: true,
-      type: 'cat'
-    },
-    {
-      name: 'Timmy',
-      fostered: true,
-      type: 'bull'
-    },
-    {
-      name: 'Tony',
-      adopted: true
-    }];
-
   const getUserApi = async () => {
-    const response = await fetch('http://localhost:5000/user');
+    const response = await fetch('http://localhost:5000/userlogin');
     const body = await response.json();
+    console.log(body)
     if (response.status !== 200) throw Error(body.message);
+    console.log(body)
     return body;
   }
 
   useEffect(() => {
     getUserApi()
       .then(res => {
+        console.log(res)
         setFirstName(res.firstName);
         setLastName(res.lastName);
+        setTelephone(res.telephone)
+        setEmail(res.email)
       })
       .catch(err => console.log(err));
     setUserPetStatus(7);
-    setPets(mockPets);
-    setAllPets(mockPets);
     setAdopted(true);
     setFostered(false);
-  }, [])
+  }, [currentUser])
+
 
   return (
     <MainContext.Provider value={{
       pets, setPets,
       users, setUsers,
-      newUser, setNewUser,
       firstName, setFirstName,
       lastName, setLastName,
       fostered, adopted, userPetStatus,
       email, setEmail,
       telephone, setTelephone,
       allPets, setAllPets,
-      password, setPassword
+      password, setPassword,
+      currentUser, setCurrentUser,
+      bio, setBio,
     }}>
       <Router>
         <Switch>

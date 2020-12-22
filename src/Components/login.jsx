@@ -5,19 +5,21 @@ import Modal from 'react-modal';
 import { MainContext } from '../Context/context';
 
 
-
 function Login() {
     const [modalLoginIsOpen, setModalLoginIsOpen] = useState(false);
     const [modalSignIsOpen, setModalSignIsOpen] = useState(false);
-    const [password2, setPassword2] = useState()
+    const [password2, setPassword2] = useState();
+    const [error, setError] = useState('');
     const { newUser, setNewUser } = useContext(MainContext);
     const { users, setUsers } = useContext(MainContext);
-    const{firstName, setFirstName} = useContext(MainContext)
-    const{lastName, setLastName} = useContext(MainContext)
-    const{email, setEmail} = useContext(MainContext)
-    const{telephone, setTelephone} = useContext(MainContext)
-    const{bio, setBio} = useContext(MainContext)
-    const{password, setPassword} = useContext(MainContext)
+    const { firstName, setFirstName } = useContext(MainContext);
+    const { lastName, setLastName } = useContext(MainContext);
+    const { email, setEmail } = useContext(MainContext);
+    const { telephone, setTelephone } = useContext(MainContext);
+    const { bio, setBio } = useContext(MainContext);
+    const { password, setPassword } = useContext(MainContext);
+    const { currentUser, setCurrentUser } = useContext(MainContext);
+
 
     const changeFs = (e) => {
         setFirstName(e.target.value);
@@ -39,29 +41,47 @@ function Login() {
     const changePassword2 = (e) => {
         setPassword2(e.target.value);
     }
-    const submitprofile = async (e) => {
+    const submitSignUp = async (e) => {
         e.preventDefault();
-        const newUserData = {
-            firstName: firstName,
-            lastName: lastName,
-            telephone: telephone,
+        if (password === password2) {
+            setError('');
+            const newUserData = {
+                firstName: firstName,
+                lastName: lastName,
+                telephone: telephone,
+                email: email,
+                password: password,
+            }
+            if (newUserData) {
+                setNewUser(newUserData);
+                setUsers([...users, newUser]);
+            }
+            const response = await fetch('http://localhost:5000/user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ post: newUserData }),
+            })
+            const body = await response.text();
+        }
+        else return setError('Passwords do not match');
+    }
+    const submitLogin = async (e) => {
+        e.preventDefault();
+        const loginUserData = {
             email: email,
             password: password,
-            bio: bio
         }
-        if (newUserData) {
-            setNewUser(newUserData);
-            setUsers([...users, newUser]);
-        }
-        const response = await fetch('http://localhost:5000/user', {
-            method:'POST',
-            headers:{
-                'Content-Type' : 'application/json',
+        const response = await fetch('http://localhost:5000/userlogin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify({post : newUserData}),
+            body: JSON.stringify({ post: loginUserData }),
         })
-        const body = await response.text();
-        console.log(body)  
+        const body = await response.json();
+        setCurrentUser(body)
     }
 
     return (
@@ -91,13 +111,13 @@ function Login() {
                             <Form >
                                 <Form.Group id="email">
                                     <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" required></Form.Control>
+                                    <Form.Control type="email" required onChange={e => changeEmail(e)}></Form.Control>
                                 </Form.Group>
                                 <Form.Group id="password">
                                     <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" required></Form.Control>
+                                    <Form.Control type="password" required onChange={e => changePassword(e)}></Form.Control>
                                 </Form.Group>
-                                <Button className="w-100" type="submit" variant='success' >Log In</Button>
+                                <Button className="w-100" type="submit" variant='success' onClick={(e) => submitLogin(e)}  >Log In</Button>
                             </Form>
                         </Card.Body>
                     </Card>
@@ -108,6 +128,7 @@ function Login() {
                 >
                     <Card className='sign-card'>
                         <Card.Body><h2 className="text-center mb-5 sign-header">Sign-Up</h2></Card.Body>
+                        {error && <Alert variant="danger">{error}</Alert>}
                         <Form >
                             <Form.Row>
                                 <Col>
@@ -131,7 +152,7 @@ function Login() {
                             </Form.Row>
                             <Form.Group id="email">
                                 <Form.Label>Email</Form.Label>
-                                <Form.Control type="email"  required onChange={e => changeEmail(e)}></Form.Control>
+                                <Form.Control type="email" required onChange={e => changeEmail(e)}></Form.Control>
                             </Form.Group>
                             <Form.Group id="password">
                                 <Form.Label>Password</Form.Label>
@@ -141,7 +162,7 @@ function Login() {
                                 <Form.Label>Password Confirmation</Form.Label>
                                 <Form.Control type="password" required onChange={e => changePassword2(e)} ></Form.Control>
                             </Form.Group>
-                            <Button className="w-100" type="submit" variant='success' onClick={(e) => submitprofile(e)} >Sign Up</Button>
+                            <Button className="w-100" type="submit" variant='success' onClick={(e) => submitSignUp(e)} >Sign Up</Button>
                         </Form>
                     </Card>
                 </Modal>
