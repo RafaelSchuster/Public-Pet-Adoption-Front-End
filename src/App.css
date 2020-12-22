@@ -3,8 +3,9 @@
      font-family: 'Grandstander', cursive;
      color: black;
      font-size: 25px;
-     overflow: hidden;
-     background-repeat: no-repeat;
+
+     background-repeat: repeat;
+
  }
 
  .main-div {
@@ -265,7 +266,7 @@
      background-color: rgb(95, 41, 10);
      opacity: 90%;
      width: 100%;
-     height: 100%;
+     height: 400%;
      color: white;
      left: 0%;
      padding: 150px;
@@ -327,7 +328,7 @@
      height: 32px;
      top: 48px;
      left: 20%;
-     font-size: 30px;
+     font-size: 20px;
      font-style: normal;
      font-weight: 400;
      line-height: 16px;
@@ -344,11 +345,20 @@
      left: 20px;
      font-style: normal;
      font-weight: normal;
-     font-size: 30px;
+     font-size: 20px;
      line-height: 16px;
      display: flex;
      align-items: center;
      color: white;
+ }
+
+ .pet-breed {
+     position: absolute;
+     font-size: 20px;
+     top: 40%;
+     left: 40%;
+
+
  }
 
  .profile-link {
@@ -393,11 +403,23 @@
      left: 20px;
      font-style: normal;
      font-weight: normal;
-     font-size: 50px;
+     font-size: 30px;
      line-height: 16px;
      display: flex;
      align-items: center;
      color: white;
+ }
+
+ .user-lastname {
+     position: absolute;
+     left: 35%;
+     top: 35%;
+ }
+
+ .user-email {
+     position: absolute;
+     left: 58%;
+     top: 35%;
  }
 
  .edit-profile-link {

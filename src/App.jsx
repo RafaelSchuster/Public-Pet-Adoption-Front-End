@@ -18,12 +18,14 @@ import AdminDashboard from './Components/admindash';
 import { MainContext } from './Context/context';
 import Login from './Components/login';
 import Edit from './Components/edit';
+import { getUserApi, getAllUsers, getAllPets } from '../src/Api/api.js';
+import UserFullProfile from './Components/userfullprofile';
+import PetFullProfile from './Components/petfullprofile';
 
 function App() {
-  const [pets, setPets] = useState();
   const [users, setUsers] = useState([]);
   const [newUser, setNewUser] = useState();
-  const [currentUser, setCurrentUser] = useState()
+  const [currentUser, setCurrentUser] = useState();
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
@@ -35,25 +37,25 @@ function App() {
   const [userPetStatus, setUserPetStatus] = useState();
   const [allPets, setAllPets] = useState();
 
-  const getUserApi = async () => {
-    const response = await fetch('http://localhost:5000/userlogin');
-    const body = await response.json();
-    console.log(body)
-    if (response.status !== 200) throw Error(body.message);
-    console.log(body)
-    return body;
-  }
 
   useEffect(() => {
     getUserApi()
       .then(res => {
-        console.log(res)
         setFirstName(res.firstName);
         setLastName(res.lastName);
-        setTelephone(res.telephone)
-        setEmail(res.email)
+        setTelephone(res.telephone);
+        setEmail(res.email);
       })
       .catch(err => console.log(err));
+    getAllUsers()
+      .then(res => {
+        setUsers(res);
+      })
+    getAllPets()
+      .then(res => {
+        setAllPets(res);
+      })
+
     setUserPetStatus(7);
     setAdopted(true);
     setFostered(false);
@@ -62,7 +64,6 @@ function App() {
 
   return (
     <MainContext.Provider value={{
-      pets, setPets,
       users, setUsers,
       firstName, setFirstName,
       lastName, setLastName,
@@ -134,6 +135,13 @@ function App() {
             <NavBar />
             <Edit />
           </Route>
+        </Switch>
+        <Switch>
+          <Route path="/users/:id" component={UserFullProfile}>
+          </Route>
+        </Switch>
+        <Switch>
+          <Route exact path="/pet_profile/:id" component={PetFullProfile} />
         </Switch>
       </Router>
     </MainContext.Provider>

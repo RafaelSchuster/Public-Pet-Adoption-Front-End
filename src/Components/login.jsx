@@ -52,11 +52,7 @@ function Login() {
                 email: email,
                 password: password,
             }
-            if (newUserData) {
-                setNewUser(newUserData);
-                setUsers([...users, newUser]);
-            }
-            const response = await fetch('http://localhost:5000/user', {
+            const response = await fetch('http://localhost:5000/user_sign', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -92,8 +88,8 @@ function Login() {
                 Here you will find all you might want to know about your pet, and let's not forget... Your next pet too.
                 We do the utmost effort to offer you the most accurate information about our animals,
                 and we give you also many options regarding fostering and adopting pets.
-                Let's not forget that animals have feelings too and they need our support.
-                After all This world is for us to live together, isn't it?
+                As they say, animals have feelings too and they need our support.
+                After all this world is for us to live together, isn't it?
                 So please Login if you have an account, if not, just make one! And start browsing in our website,
                 your next pet might be just one click away from his next home!
                 Good petting!
@@ -108,7 +104,7 @@ function Login() {
                     <Card className='login-card'>
                         <Card.Body>
                             <h2 className="text-center mb-4">Log In</h2>
-                            <Form >
+                            <Form onSubmit={(e) => submitLogin(e)}>
                                 <Form.Group id="email">
                                     <Form.Label>Email</Form.Label>
                                     <Form.Control type="email" required onChange={e => changeEmail(e)}></Form.Control>
@@ -117,7 +113,7 @@ function Login() {
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control type="password" required onChange={e => changePassword(e)}></Form.Control>
                                 </Form.Group>
-                                <Button className="w-100" type="submit" variant='success' onClick={(e) => submitLogin(e)}  >Log In</Button>
+                                <Button className="w-100" type="submit" variant='success'>Log In</Button>
                             </Form>
                         </Card.Body>
                     </Card>
@@ -129,7 +125,7 @@ function Login() {
                     <Card className='sign-card'>
                         <Card.Body><h2 className="text-center mb-5 sign-header">Sign-Up</h2></Card.Body>
                         {error && <Alert variant="danger">{error}</Alert>}
-                        <Form >
+                        <Form onSubmit={(e) => submitSignUp(e)} >
                             <Form.Row>
                                 <Col>
                                     <Form.Group id="firstName">
@@ -162,7 +158,7 @@ function Login() {
                                 <Form.Label>Password Confirmation</Form.Label>
                                 <Form.Control type="password" required onChange={e => changePassword2(e)} ></Form.Control>
                             </Form.Group>
-                            <Button className="w-100" type="submit" variant='success' onClick={(e) => submitSignUp(e)} >Sign Up</Button>
+                            <Button className="w-100" type="submit" variant='success'  >Sign Up</Button>
                         </Form>
                     </Card>
                 </Modal>

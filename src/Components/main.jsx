@@ -19,7 +19,7 @@ function Main() {
                         className="form-control form-hp "
                         id=''
                         rows={1}
-                        placeholder='Search Pets...'>
+                        placeholder='Search Pets By Type...'>
                     </FormControl>
                     <a href="/searchresults" className="btn btn-warning w-100" >Basic Search</a>
                     <a href="/search" className="btn btn-success w-100 mt-2" >To The Search Page</a>

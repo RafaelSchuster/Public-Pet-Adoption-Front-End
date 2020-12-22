@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, Button, Container, Form, FormControl, Col, Row, Navbar, Nav, } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
+import { getPetById } from '../Api/api';
 
-function AdminForm() {
+function PetFullProfile(props) {
+    const [id, setId] = useState(props.match.params.id);
+    const [thisPet, setThisPet] = useState({});
     const [petName, setPetName] = useState();
     const [type, setType] = useState();
     const [color, setColor] = useState();
@@ -14,6 +17,15 @@ function AdminForm() {
     const [hypoalergenic, setHypoalergenic] = useState();
     const [dietRestrictions, setDietRestrictions] = useState();
     const [petBio, setPetBio] = useState();
+
+    useEffect(() => {
+        getPetById(id)
+            .then(res => {
+                setThisPet(res);
+            })
+            .catch(err => console.log(err));
+    }, [])
+
 
     const addPetName = (e) => {
         setPetName(e.target.value);
@@ -45,13 +57,11 @@ function AdminForm() {
     }
 
     const hypoSelect = (e) => {
-        const selected = e.target.value
+        const selected = e.target.value;
         setHypoalergenic(selected);
     }
 
-
     const petSubmitting = async (e) => {
-
         e.preventDefault();
         const newPetData = {
             name: petName,
@@ -76,7 +86,6 @@ function AdminForm() {
         const body = await response.text();
     }
 
-
     return (
         <div>
             <h1 className="header-admin mb-5"> Admin Pet's Upload Form</h1>
@@ -92,31 +101,37 @@ function AdminForm() {
                 <Form onSubmit={e => petSubmitting(e)}>
                     <Form.Row>
                         <Col>
-                            <Form.Control placeholder="Type" onChange={e => addPetType(e)} />
+                            <Form.Control placeholder="Type"
+                                onChange={e => addPetType(e)} defaultValue={thisPet.type} />
                         </Col>
                         <Col>
-                            <Form.Control placeholder="Pet's Name" onChange={e => addPetName(e)} />
+                            <Form.Control placeholder="Pet's Name"
+                                onChange={e => addPetName(e)} defaultValue={thisPet.name} />
                         </Col>
                         <Col>
-                            <Form.Control placeholder="Color" onChange={e => addPetColor(e)} />
+                            <Form.Control placeholder="Color"
+                                onChange={e => addPetColor(e)} defaultValue={thisPet.color} />
                         </Col>
                     </Form.Row>
                     <Form.Row className="mt-3">
                         <Col>
-                            <Form.Control type="number" placeholder="Height" onChange={e => addPetHeight(e)} />
+                            <Form.Control type="number" placeholder="Height"
+                                onChange={e => addPetHeight(e)} defaultValue={thisPet.height} />
                         </Col>
                         <Col>
-                            <Form.Control type="number" placeholder="Weight" onChange={e => addPetWeight(e)} />
+                            <Form.Control type="number" placeholder="Weight"
+                                onChange={e => addPetWeight(e)} defaultValue={thisPet.weight} />
                         </Col>
                         <Col>
-                            <Form.Control placeholder="Breed" onChange={e => addPetBreed(e)} />
+                            <Form.Control placeholder="Breed"
+                                onChange={e => addPetBreed(e)} defaultValue={thisPet.breed} />
                         </Col>
                     </Form.Row>
                     <Form.Row className="mt-3">
                         <Col>
                             <Form.Group controlId="exampleForm.ControlSelect1">
                                 <Form.Label>Adoption Status:</Form.Label>
-                                <Form.Control as="select" defaultValue='adopted' onChange={selectValue => adoptSelect(selectValue)}>
+                                <Form.Control as="select" onChange={selectValue => adoptSelect(selectValue)}>
                                     <option></option>
                                     <option value='adopted'>Adopted</option>
                                     <option value='fostered'>Fostered</option>
@@ -135,7 +150,8 @@ function AdminForm() {
                         <Col>
                             <Form.Group controlId="exampleForm.ControlTextarea1">
                                 <Form.Label>Dietary Restrictions</Form.Label>
-                                <Form.Control as="textarea" rows={5} placeholder="Dietary Restrictions..." onChange={e => addDiet(e)} />
+                                <Form.Control as="textarea" rows={5} placeholder="Dietary Restrictions..."
+                                    onChange={e => addDiet(e)} defaultValue={thisPet.dietRestrictions} />
                             </Form.Group>
                         </Col>
                         <Col>
@@ -146,7 +162,8 @@ function AdminForm() {
                     </Form.Row>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label></Form.Label>
-                        <Form.Control as="textarea" rows={3} placeholder="Pet's Bio" onChange={e => addPetBio(e)} />
+                        <Form.Control as="textarea" rows={3} placeholder="Pet's Bio"
+                            onChange={e => addPetBio(e)} defaultValue={thisPet.petBio} />
                     </Form.Group>
                     <Button className="w-100 mt-2" variant="warning" type="submit">
                         Submit
@@ -155,6 +172,5 @@ function AdminForm() {
             </Container>
         </div>
     )
-
 }
-export default AdminForm;
+export default PetFullProfile;

@@ -14,8 +14,12 @@ function PetItem(props) {
                 className='pet-type'>
                 {`Type : ${props.type}`}
             </span>
-            <a href={`/${props.name}`} className="btn btn-success profile-link">View Pet's Full Profile</a>
-            <a href={`/edit`} className="btn btn-warning edit-profile-link">Edit Pet's Profile</a>
+            <span
+                className='pet-breed'>
+                {`Breed : ${props.breed}`}
+            </span>
+
+            <a href={`/pet_profile/${props.id}`} className="btn btn-success profile-link">View Pet's Full Profile</a>
         </div>
     )
 }
