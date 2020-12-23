@@ -3,6 +3,7 @@ import { Alert, Button, Container, Form, FormControl, Col, Row, Navbar, Nav, } f
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { getPetById } from '../Api/api';
+import axios from 'axios';
 
 function PetFullProfile(props) {
     const [id, setId] = useState(props.match.params.id);
@@ -61,9 +62,23 @@ function PetFullProfile(props) {
         setHypoalergenic(selected);
     }
 
+    const imageHandler = (e) =>{
+        const data = new FormData()
+        e.target.files[0].id = id
+        data.append('file', e.target.files[0])
+        data.append('id', e.target.files[0].id )
+        console.log(e.target.files[0])
+        axios.post(`http://localhost:5000/image_upload/${id}`, data)
+            .then(res =>{
+                
+                console.log('yes' + res)
+            })
+    }
+
     const petSubmitting = async (e) => {
         e.preventDefault();
         const newPetData = {
+            id : id,
             name: petName,
             breed, breed,
             type: type,
@@ -75,8 +90,7 @@ function PetFullProfile(props) {
             dietRestrictions: dietRestrictions,
             petBio: petBio
         }
-        console.log(newPetData)
-        const response = await fetch('http://localhost:5000/pet_profile', {
+        const response = await fetch('http://localhost:5000/pet_admin_edit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -98,7 +112,7 @@ function PetFullProfile(props) {
                 Click Here To Admin's Dashboard
             </a>
             <Container className="container-profile admin-prof">
-                <Form onSubmit={e => petSubmitting(e)}>
+                <Form onSubmit={e => petSubmitting(e)} encType="multipart/form-data">
                     <Form.Row>
                         <Col>
                             <Form.Control placeholder="Type"
@@ -156,7 +170,9 @@ function PetFullProfile(props) {
                         </Col>
                         <Col>
                             <Form.Group>
-                                <Form.File id="exampleFormControlFile1" label="Upload Pet's Image" />
+                                <input id="exampleFormControlFile1" 
+                                label="Upload Pet's Image" 
+                                type='file' name ='file'onChange={e => imageHandler(e)} />
                             </Form.Group>
                         </Col>
                     </Form.Row>

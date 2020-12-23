@@ -4,8 +4,11 @@ import Modal from 'react-modal';
 import image1 from "../images/dog.jpg";
 import '../App.css';
 
+
+
 function PetCard(props) {
     const [modalIsOpen1, setModalIsOpen1] = useState(false);
+    console.log(props)
     return (
         <>
             <Card className="my-card">

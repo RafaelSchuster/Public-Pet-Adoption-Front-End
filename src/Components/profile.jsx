@@ -98,7 +98,7 @@ function Profile() {
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label></Form.Label>
                         <Form.Control as="textarea" rows={3} placeholder="Personal Bio About Yourself!"
-                            onChange={e => changeBio(e)} />
+                            onChange={e => changeBio(e)} defaultValue={bio} />
                     </Form.Group>
                     <Button className="w-100 mt-4" variant="warning" type="submit"
                     >

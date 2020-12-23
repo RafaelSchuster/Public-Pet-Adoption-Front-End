@@ -198,6 +198,7 @@
  }
 
  .my-card {
+     max-width: 300px;
      background-color: rgb(245, 234, 221) !important;
  }
 

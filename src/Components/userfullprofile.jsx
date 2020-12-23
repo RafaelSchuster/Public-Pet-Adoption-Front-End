@@ -10,7 +10,7 @@ import { getUserById } from '../Api/api'
 
 function UserFullProfile(props) {
     const [id, setId] = useState(props.match.params.id);
-    const[thisUser, setThisUser] = useState({});
+    const [thisUser, setThisUser] = useState({});
     const [error, setError] = useState();
     const [userFullProfile, setUserFullProfile] = useState();
     const { newUser, setNewUser } = useContext(MainContext);
@@ -20,12 +20,13 @@ function UserFullProfile(props) {
     const { email, setEmail } = useContext(MainContext);
     const { telephone, setTelephone } = useContext(MainContext);
     const { bio, setBio } = useContext(MainContext);
-    const { password, setPassword } = useContext(MainContext);
+    const { userPets, setUserPets } = useContext(MainContext)
 
     useEffect(() => {
         getUserById(id)
             .then(res => {
                 setThisUser(res);
+                console.log(thisUser)
             })
             .catch(err => console.log(err));
     }, [])
@@ -45,7 +46,9 @@ function UserFullProfile(props) {
         setEmail(e.target.value);
     }
     const changePets = (e) => {
-        setPassword(e.target.value);
+        const str = e.target.value
+        let arrPets = str.split(',')
+        setUserPets(arrPets)
     }
     const changeBio = (e) => {
         setBio(e.target.value);
@@ -54,14 +57,15 @@ function UserFullProfile(props) {
     const submitprofile = async (e) => {
         e.preventDefault();
         const newUserData = {
+            id: id,
             firstName: firstName,
             lastName: lastName,
             telephone: telephone,
             email: email,
-            password: password,
+            petsOwned: userPets,
             bio: bio
         }
-        const response = await fetch('http://localhost:5000/userprofile', {
+        const response = await fetch('http://localhost:5000/user_admin_edit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,6 +73,7 @@ function UserFullProfile(props) {
             body: JSON.stringify({ post: newUserData }),
         })
         const body = await response.text();
+        console.log(body)
     }
 
     return (
@@ -109,8 +114,8 @@ function UserFullProfile(props) {
                         <Col>
                             <Form.Group controlId="formGroupPassword">
                                 <Form.Label></Form.Label>
-                                <Form.Control type="text" placeholder="Pets Owned"
-                                    onChange={e => changePets(e)} required />
+                                <Form.Control type="text" placeholder="Pets Owned IDs"
+                                    onChange={e => changePets(e)} required defaultValue={thisUser.petsOwned} />
                             </Form.Group>
                         </Col>
                     </Form.Row>

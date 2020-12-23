@@ -3,17 +3,31 @@ import { Card, CardDeck, Container, CardImg, CardImage, Image, Img, Button } fro
 import Modal from 'react-modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
-import image1 from "../images/dog.jpg";
-import image2 from "../images/cat.jpg";
-import image3 from "../images/giraffe.jpg";
 import { MainContext } from '../Context/context';
 import PetCard from './petcard';
+import { getPetById } from '../Api/api'
+
+const arrPets = []
 
 function MyPets() {
     const [modalIsOpen1, setModalIsOpen1] = useState(false);
     const [modalIsOpen2, setModalIsOpen2] = useState(false);
     const [modalIsOpen3, setModalIsOpen3] = useState(false);
-    const { pets, setPets, adopted, fostered, userPetStatus } = useContext(MainContext);
+    const [petsToDisplay, setPetsToDisplay] = useState([])
+    const { pets, setPets, adopted, fostered, userPetStatus, userPets, currentUser } = useContext(MainContext);
+
+    useEffect(() => {
+        const arrPets = []
+        if (userPets && userPets.length > 0) {
+            userPets.map(id => {
+                getPetById(id)
+                    .then(res => {
+                        arrPets.push(res)
+                        setPetsToDisplay([...arrPets])
+                    })
+            })
+        }
+    }, [userPets])
 
     return (
         <>
@@ -21,13 +35,14 @@ function MyPets() {
                 <h1 className="header-profile mb-5"> Your Pets</h1>
             </div>
             <Card className="status">
-                {userPetStatus && <Card.Body className="head-status">{`You have adopted ${userPetStatus} Pets.`}</Card.Body>}
+                {userPets && <Card.Body className="head-status">{`You have adopted ${userPets.length} Pets.`}</Card.Body>}
             </Card>
             <Container className="my-pets">
                 <CardDeck className="deck">
-                    {pets && pets.map(pet =>
+                    {petsToDisplay && petsToDisplay.map(pet =>
                         <PetCard
                             key={Math.random()}
+                            id={pet.id}
                             name={pet.name}
                             adopted={pet.adopted}
                             fostered={pet.fostered}

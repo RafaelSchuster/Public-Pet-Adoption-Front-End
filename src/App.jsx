@@ -24,7 +24,6 @@ import PetFullProfile from './Components/petfullprofile';
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [newUser, setNewUser] = useState();
   const [currentUser, setCurrentUser] = useState();
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -36,6 +35,8 @@ function App() {
   const [adopted, setAdopted] = useState(false);
   const [userPetStatus, setUserPetStatus] = useState();
   const [allPets, setAllPets] = useState();
+  const [userPets, setUserPets] = useState()
+  const [pets, setPets] = useState()
 
 
   useEffect(() => {
@@ -45,6 +46,8 @@ function App() {
         setLastName(res.lastName);
         setTelephone(res.telephone);
         setEmail(res.email);
+        setBio(res.bio)
+        setUserPets(res.petsOwned)
       })
       .catch(err => console.log(err));
     getAllUsers()
@@ -74,6 +77,8 @@ function App() {
       password, setPassword,
       currentUser, setCurrentUser,
       bio, setBio,
+      userPets, setUserPets,
+      pets, setPets
     }}>
       <Router>
         <Switch>
