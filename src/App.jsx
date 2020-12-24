@@ -35,8 +35,8 @@ function App() {
   const [adopted, setAdopted] = useState(false);
   const [userPetStatus, setUserPetStatus] = useState();
   const [allPets, setAllPets] = useState();
-  const [userPets, setUserPets] = useState()
-  const [pets, setPets] = useState()
+  const [userPets, setUserPets] = useState();
+  const [pets, setPets] = useState();
 
 
   useEffect(() => {
@@ -46,8 +46,8 @@ function App() {
         setLastName(res.lastName);
         setTelephone(res.telephone);
         setEmail(res.email);
-        setBio(res.bio)
-        setUserPets(res.petsOwned)
+        setBio(res.bio);
+        setUserPets(res.petsOwned);
       })
       .catch(err => console.log(err));
     getAllUsers()

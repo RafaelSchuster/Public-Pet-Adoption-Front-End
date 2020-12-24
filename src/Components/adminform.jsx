@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { Alert, Button, Container, Form, FormControl, Col, Row, Navbar, Nav, } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
+import axios from 'axios';
+
 
 function AdminForm() {
+    const [id, setId] = useState();
     const [petName, setPetName] = useState();
     const [type, setType] = useState();
     const [color, setColor] = useState();
@@ -14,6 +17,7 @@ function AdminForm() {
     const [hypoalergenic, setHypoalergenic] = useState();
     const [dietRestrictions, setDietRestrictions] = useState();
     const [petBio, setPetBio] = useState();
+    const [imgActive, setImgActive] = useState(false);
 
     const addPetName = (e) => {
         setPetName(e.target.value);
@@ -49,9 +53,18 @@ function AdminForm() {
         setHypoalergenic(selected);
     }
 
+    const imageHandler = (e) => {
+        axios.get(`http://localhost:5000/pet_id/${petName}/type/${type}`)
+            .then(res => {
+                setId(res.data);
+            })
+        const data = new FormData();
+        data.append('file', e.target.files[0]);
+        data.append('id', id);
+        axios.post(`http://localhost:5000/image_upload/${id}`, data);
+    }
 
     const petSubmitting = async (e) => {
-
         e.preventDefault();
         const newPetData = {
             name: petName,
@@ -65,7 +78,6 @@ function AdminForm() {
             dietRestrictions: dietRestrictions,
             petBio: petBio
         }
-        console.log(newPetData)
         const response = await fetch('http://localhost:5000/pet_profile', {
             method: 'POST',
             headers: {
@@ -74,6 +86,7 @@ function AdminForm() {
             body: JSON.stringify({ post: newPetData }),
         })
         const body = await response.text();
+        setImgActive(true);
     }
 
 
@@ -92,31 +105,31 @@ function AdminForm() {
                 <Form onSubmit={e => petSubmitting(e)}>
                     <Form.Row>
                         <Col>
-                            <Form.Control placeholder="Type" onChange={e => addPetType(e)} />
+                            <Form.Control placeholder="Type" onChange={e => addPetType(e)} required />
                         </Col>
                         <Col>
-                            <Form.Control placeholder="Pet's Name" onChange={e => addPetName(e)} />
+                            <Form.Control placeholder="Pet's Name" onChange={e => addPetName(e)} required />
                         </Col>
                         <Col>
-                            <Form.Control placeholder="Color" onChange={e => addPetColor(e)} />
+                            <Form.Control placeholder="Color" onChange={e => addPetColor(e)} required />
                         </Col>
                     </Form.Row>
                     <Form.Row className="mt-3">
                         <Col>
-                            <Form.Control type="number" placeholder="Height" onChange={e => addPetHeight(e)} />
+                            <Form.Control type="number" placeholder="Height" onChange={e => addPetHeight(e)} required />
                         </Col>
                         <Col>
-                            <Form.Control type="number" placeholder="Weight" onChange={e => addPetWeight(e)} />
+                            <Form.Control type="number" placeholder="Weight" onChange={e => addPetWeight(e)} required />
                         </Col>
                         <Col>
-                            <Form.Control placeholder="Breed" onChange={e => addPetBreed(e)} />
+                            <Form.Control placeholder="Breed" onChange={e => addPetBreed(e)} required />
                         </Col>
                     </Form.Row>
                     <Form.Row className="mt-3">
                         <Col>
                             <Form.Group controlId="exampleForm.ControlSelect1">
                                 <Form.Label>Adoption Status:</Form.Label>
-                                <Form.Control as="select" defaultValue='adopted' onChange={selectValue => adoptSelect(selectValue)}>
+                                <Form.Control as="select" defaultValue='adopted' onChange={selectValue => adoptSelect(selectValue)} required >
                                     <option></option>
                                     <option value='adopted'>Adopted</option>
                                     <option value='fostered'>Fostered</option>
@@ -125,7 +138,7 @@ function AdminForm() {
                             </Form.Group>
                             <Form.Group controlId="exampleForm.ControlSelect2">
                                 <Form.Label>Hypoalergenic:</Form.Label>
-                                <Form.Control as="select" onChange={selectValue => hypoSelect(selectValue)}>
+                                <Form.Control as="select" onChange={selectValue => hypoSelect(selectValue)} required>
                                     <option></option>
                                     <option>Yes</option>
                                     <option>No</option>
@@ -140,7 +153,11 @@ function AdminForm() {
                         </Col>
                         <Col>
                             <Form.Group>
-                                <Form.File id="exampleFormControlFile1" label="Upload Pet's Image" />
+                                {!imgActive ? <Form.Label>Upload Pet's Image(After Submitting..)</Form.Label> :
+                                    <Form.Label>Upload Pet's Image</Form.Label>}
+                                {imgActive && <input id="exampleFormControlFile1"
+                                    label="Upload Pet's Image"
+                                    type='file' name='file' onChange={e => imageHandler(e)} />}
                             </Form.Group>
                         </Col>
                     </Form.Row>

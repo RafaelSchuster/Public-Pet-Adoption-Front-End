@@ -62,23 +62,18 @@ function PetFullProfile(props) {
         setHypoalergenic(selected);
     }
 
-    const imageHandler = (e) =>{
-        const data = new FormData()
-        e.target.files[0].id = id
-        data.append('file', e.target.files[0])
-        data.append('id', e.target.files[0].id )
-        console.log(e.target.files[0])
-        axios.post(`http://localhost:5000/image_upload/${id}`, data)
-            .then(res =>{
-                
-                console.log('yes' + res)
-            })
+    const imageHandler = (e) => {
+        const data = new FormData();
+        e.target.files[0].id = id;
+        data.append('file', e.target.files[0]);
+        data.append('id', e.target.files[0].id);
+        axios.post(`http://localhost:5000/image_upload/${id}`, data);
     }
 
     const petSubmitting = async (e) => {
         e.preventDefault();
         const newPetData = {
-            id : id,
+            id: id,
             name: petName,
             breed, breed,
             type: type,
@@ -170,9 +165,9 @@ function PetFullProfile(props) {
                         </Col>
                         <Col>
                             <Form.Group>
-                                <input id="exampleFormControlFile1" 
-                                label="Upload Pet's Image" 
-                                type='file' name ='file'onChange={e => imageHandler(e)} />
+                                <input id="exampleFormControlFile1"
+                                    label="Upload Pet's Image"
+                                    type='file' name='file' onChange={e => imageHandler(e)} />
                             </Form.Group>
                         </Col>
                     </Form.Row>

@@ -7,13 +7,13 @@ import { MainContext } from '../Context/context';
 import PetCard from './petcard';
 import { getPetById } from '../Api/api'
 
-const arrPets = []
+const arrPets = [];
 
 function MyPets() {
     const [modalIsOpen1, setModalIsOpen1] = useState(false);
     const [modalIsOpen2, setModalIsOpen2] = useState(false);
     const [modalIsOpen3, setModalIsOpen3] = useState(false);
-    const [petsToDisplay, setPetsToDisplay] = useState([])
+    const [petsToDisplay, setPetsToDisplay] = useState([]);
     const { pets, setPets, adopted, fostered, userPetStatus, userPets, currentUser } = useContext(MainContext);
 
     useEffect(() => {
@@ -24,10 +24,10 @@ function MyPets() {
                     .then(res => {
                         arrPets.push(res)
                         setPetsToDisplay([...arrPets])
-                    })
+                    });
             })
-        }
-    }, [userPets])
+        };
+    }, [userPets]);
 
     return (
         <>
@@ -44,9 +44,16 @@ function MyPets() {
                             key={Math.random()}
                             id={pet.id}
                             name={pet.name}
-                            adopted={pet.adopted}
-                            fostered={pet.fostered}
-                            type={pet.type} />
+                            type={pet.type}
+                            breed={pet.breed}
+                            color={pet.color}
+                            diet={pet.dietRestrictions}
+                            height={pet.height}
+                            weight={pet.weight}
+                            hypoalergenic={pet.hypoalergenic}
+                            bio={pet.petBio}
+                            petStatus={pet.petStatus}
+                        />
                     )
                     }
                 </CardDeck>
