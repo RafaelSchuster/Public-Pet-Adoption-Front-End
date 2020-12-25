@@ -6,18 +6,18 @@ import { searchPetByType } from '../Api/api';
 import NavBar from './navbar';
 
 function BasicSearchResults(props) {
-    const [basicSearchResults, setBasicSearchResults] = useState()
-    const [typeSearch, setTypeSearch] = useState(props.match.params.type)
+    const [basicSearchResults, setBasicSearchResults] = useState();
+    const [typeSearch, setTypeSearch] = useState(props.match.params.type);
 
     const basicSearching = (e) => {
         searchPetByType(typeSearch)
             .then(res => {
-                setBasicSearchResults(res)
+                setBasicSearchResults(res);
             })
     }
 
     useEffect(() => {
-        basicSearching(typeSearch)
+        basicSearching(typeSearch);
     }, [])
 
     return (

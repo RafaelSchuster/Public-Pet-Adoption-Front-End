@@ -98,93 +98,93 @@ function PetFullProfile(props) {
 
     return (
         <>
-        <NavBar/>
-        <div>
-            <h1 className="header-admin mb-5"> Admin Pet's Upload Form</h1>
-            <a
-                href="/admindashboard"
-                className="btn btn-success w-100 admin-link"
-                variant="warning"
-                type="submit"
-            >
-                Click Here To Admin's Dashboard
+            <NavBar />
+            <div>
+                <h1 className="header-admin mb-5"> Admin Pet's Upload Form</h1>
+                <a
+                    href="/admindashboard"
+                    className="btn btn-success w-100 admin-link"
+                    variant="warning"
+                    type="submit"
+                >
+                    Click Here To Admin's Dashboard
             </a>
-            <Container className="container-profile admin-prof">
-                <Form onSubmit={e => petSubmitting(e)} encType="multipart/form-data">
-                    <Form.Row>
-                        <Col>
-                            <Form.Control placeholder="Type"
-                                onChange={e => addPetType(e)} defaultValue={thisPet.type} />
-                        </Col>
-                        <Col>
-                            <Form.Control placeholder="Pet's Name"
-                                onChange={e => addPetName(e)} defaultValue={thisPet.name} />
-                        </Col>
-                        <Col>
-                            <Form.Control placeholder="Color"
-                                onChange={e => addPetColor(e)} defaultValue={thisPet.color} />
-                        </Col>
-                    </Form.Row>
-                    <Form.Row className="mt-3">
-                        <Col>
-                            <Form.Control type="number" placeholder="Height"
-                                onChange={e => addPetHeight(e)} defaultValue={thisPet.height} />
-                        </Col>
-                        <Col>
-                            <Form.Control type="number" placeholder="Weight"
-                                onChange={e => addPetWeight(e)} defaultValue={thisPet.weight} />
-                        </Col>
-                        <Col>
-                            <Form.Control placeholder="Breed"
-                                onChange={e => addPetBreed(e)} defaultValue={thisPet.breed} />
-                        </Col>
-                    </Form.Row>
-                    <Form.Row className="mt-3">
-                        <Col>
-                            <Form.Group controlId="exampleForm.ControlSelect1">
-                                <Form.Label>Adoption Status:</Form.Label>
-                                <Form.Control as="select" onChange={selectValue => adoptSelect(selectValue)}>
-                                    <option></option>
-                                    <option value='adopted'>Adopted</option>
-                                    <option value='fostered'>Fostered</option>
-                                    <option value='none'>None of Above</option>
-                                </Form.Control>
-                            </Form.Group>
-                            <Form.Group controlId="exampleForm.ControlSelect2">
-                                <Form.Label>Hypoalergenic:</Form.Label>
-                                <Form.Control as="select" onChange={selectValue => hypoSelect(selectValue)}>
-                                    <option></option>
-                                    <option>Yes</option>
-                                    <option>No</option>
-                                </Form.Control>
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group controlId="exampleForm.ControlTextarea1">
-                                <Form.Label>Dietary Restrictions</Form.Label>
-                                <Form.Control as="textarea" rows={5} placeholder="Dietary Restrictions..."
-                                    onChange={e => addDiet(e)} defaultValue={thisPet.dietRestrictions} />
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group>
-                                <input id="exampleFormControlFile1"
-                                    label="Upload Pet's Image"
-                                    type='file' name='file' onChange={e => imageHandler(e)} />
-                            </Form.Group>
-                        </Col>
-                    </Form.Row>
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                        <Form.Label></Form.Label>
-                        <Form.Control as="textarea" rows={3} placeholder="Pet's Bio"
-                            onChange={e => addPetBio(e)} defaultValue={thisPet.petBio} />
-                    </Form.Group>
-                    <Button className="w-100 mt-2" variant="warning" type="submit">
-                        Submit
+                <Container className="container-profile admin-prof">
+                    <Form onSubmit={e => petSubmitting(e)} encType="multipart/form-data">
+                        <Form.Row>
+                            <Col>
+                                <Form.Control placeholder="Type"
+                                    onChange={e => addPetType(e)} defaultValue={thisPet.type} />
+                            </Col>
+                            <Col>
+                                <Form.Control placeholder="Pet's Name"
+                                    onChange={e => addPetName(e)} defaultValue={thisPet.name} />
+                            </Col>
+                            <Col>
+                                <Form.Control placeholder="Color"
+                                    onChange={e => addPetColor(e)} defaultValue={thisPet.color} />
+                            </Col>
+                        </Form.Row>
+                        <Form.Row className="mt-3">
+                            <Col>
+                                <Form.Control type="number" placeholder="Height"
+                                    onChange={e => addPetHeight(e)} defaultValue={thisPet.height} />
+                            </Col>
+                            <Col>
+                                <Form.Control type="number" placeholder="Weight"
+                                    onChange={e => addPetWeight(e)} defaultValue={thisPet.weight} />
+                            </Col>
+                            <Col>
+                                <Form.Control placeholder="Breed"
+                                    onChange={e => addPetBreed(e)} defaultValue={thisPet.breed} />
+                            </Col>
+                        </Form.Row>
+                        <Form.Row className="mt-3">
+                            <Col>
+                                <Form.Group controlId="exampleForm.ControlSelect1">
+                                    <Form.Label>Adoption Status:</Form.Label>
+                                    <Form.Control as="select" onChange={selectValue => adoptSelect(selectValue)}>
+                                        <option></option>
+                                        <option value='adopted'>Adopted</option>
+                                        <option value='fostered'>Fostered</option>
+                                        <option value='none'>None of Above</option>
+                                    </Form.Control>
+                                </Form.Group>
+                                <Form.Group controlId="exampleForm.ControlSelect2">
+                                    <Form.Label>Hypoalergenic:</Form.Label>
+                                    <Form.Control as="select" onChange={selectValue => hypoSelect(selectValue)}>
+                                        <option></option>
+                                        <option>Yes</option>
+                                        <option>No</option>
+                                    </Form.Control>
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group controlId="exampleForm.ControlTextarea1">
+                                    <Form.Label>Dietary Restrictions</Form.Label>
+                                    <Form.Control as="textarea" rows={5} placeholder="Dietary Restrictions..."
+                                        onChange={e => addDiet(e)} defaultValue={thisPet.dietRestrictions} />
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group>
+                                    <input id="exampleFormControlFile1"
+                                        label="Upload Pet's Image"
+                                        type='file' name='file' onChange={e => imageHandler(e)} />
+                                </Form.Group>
+                            </Col>
+                        </Form.Row>
+                        <Form.Group controlId="exampleForm.ControlTextarea1">
+                            <Form.Label></Form.Label>
+                            <Form.Control as="textarea" rows={3} placeholder="Pet's Bio"
+                                onChange={e => addPetBio(e)} defaultValue={thisPet.petBio} />
+                        </Form.Group>
+                        <Button className="w-100 mt-2" variant="warning" type="submit">
+                            Submit
                     </Button>
-                </Form>
-            </Container>
-        </div>
+                    </Form>
+                </Container>
+            </div>
         </>
     )
 }

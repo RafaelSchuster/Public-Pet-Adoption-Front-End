@@ -49,7 +49,7 @@ function AdminForm() {
     }
 
     const hypoSelect = (e) => {
-        const selected = e.target.value
+        const selected = e.target.value;
         setHypoalergenic(selected);
     }
 
@@ -129,7 +129,7 @@ function AdminForm() {
                         <Col>
                             <Form.Group controlId="exampleForm.ControlSelect1">
                                 <Form.Label>Adoption Status:</Form.Label>
-                                <Form.Control as="select"  onChange={selectValue => adoptSelect(selectValue)} required >
+                                <Form.Control as="select" onChange={selectValue => adoptSelect(selectValue)} required >
                                     <option></option>
                                     <option value='adopted'>Adopted</option>
                                     <option value='fostered'>Fostered</option>

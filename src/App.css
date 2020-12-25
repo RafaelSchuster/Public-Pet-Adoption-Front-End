@@ -137,7 +137,7 @@
 
  /* Basic Search Results */
 
- .basic-search{
+ .basic-search {
      margin-top: 120px;
  }
 
@@ -294,12 +294,13 @@
      display: block;
      margin-bottom: 20px;
  }
- .pet-info{
+
+ .pet-info {
      position: absolute;
      right: 40%;
  }
 
- .profile-img{
+ .profile-img {
      position: absolute;
      max-width: 450px;
      left: 4%;

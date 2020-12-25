@@ -38,7 +38,7 @@ function App() {
   const [allPets, setAllPets] = useState();
   const [userPets, setUserPets] = useState();
   const [pets, setPets] = useState();
-  const[basicSearchResults, setBasicSearchResults] = useState()
+  const [basicSearchResults, setBasicSearchResults] = useState();
 
 
   useEffect(() => {
