@@ -129,7 +129,7 @@ function AdminForm() {
                         <Col>
                             <Form.Group controlId="exampleForm.ControlSelect1">
                                 <Form.Label>Adoption Status:</Form.Label>
-                                <Form.Control as="select" defaultValue='adopted' onChange={selectValue => adoptSelect(selectValue)} required >
+                                <Form.Control as="select"  onChange={selectValue => adoptSelect(selectValue)} required >
                                     <option></option>
                                     <option value='adopted'>Adopted</option>
                                     <option value='fostered'>Fostered</option>
@@ -153,7 +153,7 @@ function AdminForm() {
                         </Col>
                         <Col>
                             <Form.Group>
-                                {!imgActive ? <Form.Label>Upload Pet's Image(After Submitting..)</Form.Label> :
+                                {!imgActive ? <Form.Label>After Submitting You Can Upload Pet's Image Here</Form.Label> :
                                     <Form.Label>Upload Pet's Image</Form.Label>}
                                 {imgActive && <input id="exampleFormControlFile1"
                                     label="Upload Pet's Image"

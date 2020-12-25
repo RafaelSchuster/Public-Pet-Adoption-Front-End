@@ -21,6 +21,7 @@ import Edit from './Components/edit';
 import { getUserApi, getAllUsers, getAllPets } from '../src/Api/api.js';
 import UserFullProfile from './Components/userfullprofile';
 import PetFullProfile from './Components/petfullprofile';
+import BasicSearchResults from './Components/basicSearchResults';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -37,6 +38,7 @@ function App() {
   const [allPets, setAllPets] = useState();
   const [userPets, setUserPets] = useState();
   const [pets, setPets] = useState();
+  const[basicSearchResults, setBasicSearchResults] = useState()
 
 
   useEffect(() => {
@@ -78,7 +80,8 @@ function App() {
       currentUser, setCurrentUser,
       bio, setBio,
       userPets, setUserPets,
-      pets, setPets
+      pets, setPets,
+      basicSearchResults, setBasicSearchResults
     }}>
       <Router>
         <Switch>
@@ -101,9 +104,7 @@ function App() {
           </Route>
         </Switch>
         <Switch>
-          <Route path="/pets">
-            <NavBar />
-            <Pets />
+          <Route path="/pet_page/:id" component={Pets}>
           </Route>
         </Switch>
         <Switch>
@@ -113,9 +114,7 @@ function App() {
           </Route>
         </Switch>
         <Switch>
-          <Route path="/searchresults">
-            <NavBar />
-            <SearchResults />
+          <Route path="/basic_search_results/:type" component={BasicSearchResults}>
           </Route>
         </Switch>
         <Switch>

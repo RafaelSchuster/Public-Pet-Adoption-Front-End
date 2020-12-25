@@ -24,7 +24,7 @@ function PetCard(props) {
     return (
         <>
             <Card className="my-card">
-                {imgPath && <Card.Img variant="top" src={`http://localhost:5000/${imgPath}`} />}
+                <Card.Img variant="top" src={`http://localhost:5000/${imgPath}`} alt='Pet Image' />
                 <Card.Body>
                     <Card.Title>{props.name}</Card.Title>
                     <p>Adoption Status</p>

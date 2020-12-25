@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { getPetById } from '../Api/api';
 import axios from 'axios';
+import NavBar from './navbar';
 
 function PetFullProfile(props) {
     const [id, setId] = useState(props.match.params.id);
@@ -96,6 +97,8 @@ function PetFullProfile(props) {
     }
 
     return (
+        <>
+        <NavBar/>
         <div>
             <h1 className="header-admin mb-5"> Admin Pet's Upload Form</h1>
             <a
@@ -182,6 +185,7 @@ function PetFullProfile(props) {
                 </Form>
             </Container>
         </div>
+        </>
     )
 }
 export default PetFullProfile;

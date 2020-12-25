@@ -38,3 +38,17 @@ export const getImgById = async (id) => {
   if (response.status !== 200) throw Error(body.message);
   return body;
 }
+
+export const searchPetByType = async (type) => {
+  const response = await fetch(`http://localhost:5000/search_type/${type}`);
+  const body = await response.json();
+  if (response.status !== 200) throw Error(body.message);
+  return body;
+}
+
+export const advancedSearchPet = async (status, height, weight, type, name) => {
+  const response = await fetch(`http://localhost:5000/adv_search?status=${status}&height=${height}&weight=${weight}&type=${type}&name=${name}`);
+  const body = await response.json();
+  if (response.status !== 200) throw Error(body.message);
+  return body;
+}

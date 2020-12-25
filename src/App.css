@@ -132,6 +132,13 @@
 
  .navbar {
      border-radius: 10px;
+     z-index: 3;
+ }
+
+ /* Basic Search Results */
+
+ .basic-search{
+     margin-top: 120px;
  }
 
  /* Profile */
@@ -286,6 +293,18 @@
  .pet-status button {
      display: block;
      margin-bottom: 20px;
+ }
+ .pet-info{
+     position: absolute;
+     right: 40%;
+ }
+
+ .profile-img{
+     position: absolute;
+     max-width: 450px;
+     left: 4%;
+     top: 2%;
+     border-radius: 20px;
  }
 
  /* Admin */

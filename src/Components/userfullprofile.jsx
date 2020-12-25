@@ -6,6 +6,7 @@ import { useContext } from 'react';
 import { MainContext } from '../Context/context';
 import { useState } from 'react';
 import { getUserById } from '../Api/api'
+import NavBar from './navbar';
 
 
 function UserFullProfile(props) {
@@ -78,6 +79,7 @@ function UserFullProfile(props) {
 
     return (
         <>
+        <NavBar/>
             <h1 className="header-profile mb-5"> User Full Profile</h1>
             <a
                 href="/admindashboard"

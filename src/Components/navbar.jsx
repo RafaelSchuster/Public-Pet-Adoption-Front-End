@@ -9,7 +9,6 @@ function NavBar() {
         <Navbar bg="warning" variant="warning" className="navBar">
             <Nav className="mr-auto">
                 <Nav.Link href="/" className="navLink">Home</Nav.Link>
-                <Nav.Link href='/pets' className="navLink">Pets</Nav.Link>
                 <Nav.Link href='/search' className="navLink">Search</Nav.Link>
                 <Nav.Link href='/admin' className="navLink">Admin</Nav.Link>
                 <div className="banner-nav">
