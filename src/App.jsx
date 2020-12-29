@@ -39,6 +39,7 @@ function App() {
   const [userPets, setUserPets] = useState();
   const [pets, setPets] = useState();
   const [basicSearchResults, setBasicSearchResults] = useState();
+  const [token, setToken] = useState()
 
 
   useEffect(() => {
@@ -60,10 +61,6 @@ function App() {
       .then(res => {
         setAllPets(res);
       })
-
-    setUserPetStatus(7);
-    setAdopted(true);
-    setFostered(false);
   }, [currentUser])
 
 
@@ -81,7 +78,8 @@ function App() {
       bio, setBio,
       userPets, setUserPets,
       pets, setPets,
-      basicSearchResults, setBasicSearchResults
+      basicSearchResults, setBasicSearchResults,
+      token, setToken
     }}>
       <Router>
         <Switch>

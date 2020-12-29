@@ -7,8 +7,6 @@ import { getImgById } from '../Api/api'
 import { useContext } from 'react';
 import { MainContext } from '../Context/context';
 
-
-
 function PetCard(props) {
     const [modalIsOpen1, setModalIsOpen1] = useState(false);
     const [imgPath, setImgPath] = useState();

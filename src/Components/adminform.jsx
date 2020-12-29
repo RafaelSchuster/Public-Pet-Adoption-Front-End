@@ -56,12 +56,11 @@ function AdminForm() {
     const imageHandler = (e) => {
         axios.get(`http://localhost:5000/pet_id/${petName}/type/${type}`)
             .then(res => {
-                setId(res.data);
+                const data = new FormData();
+                data.append('file', e.target.files[0]);
+                data.append('id', parseInt(res.data));
+                axios.post(`http://localhost:5000/image_upload/${res.data}`, data);
             })
-        const data = new FormData();
-        data.append('file', e.target.files[0]);
-        data.append('id', id);
-        axios.post(`http://localhost:5000/image_upload/${id}`, data);
     }
 
     const petSubmitting = async (e) => {

@@ -32,6 +32,7 @@ function Main() {
                         rows={1}
                         placeholder='Search Pets By Type...'
                         onChange={e => handleTypeInput(e)}
+                        required
                         >
                     </FormControl>
                     <Button className="btn btn-warning w-100" type="submit">Basic Search</Button>

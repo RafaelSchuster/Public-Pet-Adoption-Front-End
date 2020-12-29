@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { Card, Form, Alert, Button, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import { MainContext } from '../Context/context';
 
@@ -19,6 +18,7 @@ function Login() {
     const { bio, setBio } = useContext(MainContext);
     const { password, setPassword } = useContext(MainContext);
     const { currentUser, setCurrentUser } = useContext(MainContext);
+    const{token, setToken} = useContext(MainContext)
 
 
     const changeFs = (e) => {
@@ -60,6 +60,8 @@ function Login() {
                 body: JSON.stringify({ post: newUserData }),
             })
             const body = await response.text();
+            if(body) window.location.href = 'http://localhost:3000'
+
         }
         else return setError('Passwords do not match');
     }
@@ -72,13 +74,16 @@ function Login() {
         const response = await fetch('http://localhost:5000/userlogin', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({ post: loginUserData }),
         })
         const body = await response.json();
-        setCurrentUser(body)
-    }
+        console.log(body.accessToken)
+        setToken(body.accessToken)
+    //     setCurrentUser(body)
+    //     if(body) window.location.href = 'http://localhost:3000'     
+     }
 
     return (
         <>

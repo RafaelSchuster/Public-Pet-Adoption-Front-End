@@ -17,6 +17,7 @@ function Profile() {
     const { telephone, setTelephone } = useContext(MainContext);
     const { bio, setBio } = useContext(MainContext);
     const { password, setPassword } = useContext(MainContext);
+    const {token} = useContext(MainContext)
 
     const changeFs = (e) => {
         setFirstName(e.target.value);
@@ -53,6 +54,7 @@ function Profile() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization' : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic0BzIiwiaWF0IjoxNjA5Mjc2MzA1fQ.0WeE-JMB1CP9smIM1CIXD1-audVt6cze35lKrMrtEVo `
             },
             body: JSON.stringify({ post: newUserData }),
         })

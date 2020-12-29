@@ -112,7 +112,7 @@ function Toggle() {
                                 <Form.Row>
                                     <Col>
                                         <Form.Group controlId="exampleForm.ControlSelect1">
-                                            <Form.Control as="select" onChange={selectValue => adoptSelect(selectValue)} required>
+                                            <Form.Control as="select" onChange={selectValue => adoptSelect(selectValue)} required >
                                                 <option></option>
                                                 <option value='adopted'>Adopted</option>
                                                 <option value='fostered'>Fostered</option>
