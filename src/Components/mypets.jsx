@@ -14,13 +14,13 @@ function MyPets() {
     const [modalIsOpen2, setModalIsOpen2] = useState(false);
     const [modalIsOpen3, setModalIsOpen3] = useState(false);
     const [petsToDisplay, setPetsToDisplay] = useState([]);
-    const { pets, setPets, adopted, fostered, userPetStatus, userPets, currentUser } = useContext(MainContext);
+    const { pets, setPets, adopted, fostered, userPetStatus, userPets, currentUser, token } = useContext(MainContext);
 
     useEffect(() => {
         const arrPets = []
         if (userPets && userPets.length > 0) {
             userPets.map(id => {
-                getPetById(id)
+                getPetById(token, id)
                     .then(res => {
                         arrPets.push(res)
                         setPetsToDisplay([...arrPets])
@@ -35,7 +35,8 @@ function MyPets() {
                 <h1 className="header-profile mb-5"> Your Pets</h1>
             </div>
             <Card className="status">
-                {userPets && <Card.Body className="head-status">{`You have adopted ${userPets.length} Pets.`}</Card.Body>}
+                {userPets? <Card.Body className="head-status">{`You have adopted ${userPets.length} Pets.`}</Card.Body> :
+                <Card.Body className="head-status">{`You have adopted 0 Pets.`}</Card.Body> }
             </Card>
             <Container className="my-pets">
                 <CardDeck className="deck">

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Alert, Button, Container, Form, FormControl, Col, Row, Navbar, Nav, } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import axios from 'axios';
+import { MainContext } from '../Context/context';
 
 
 function AdminForm() {
@@ -18,6 +19,7 @@ function AdminForm() {
     const [dietRestrictions, setDietRestrictions] = useState();
     const [petBio, setPetBio] = useState();
     const [imgActive, setImgActive] = useState(false);
+    const { token } = useContext(MainContext);
 
     const addPetName = (e) => {
         setPetName(e.target.value);
@@ -53,13 +55,21 @@ function AdminForm() {
         setHypoalergenic(selected);
     }
 
+    const headers = {
+        'Authorization': `Bearer ${token} `
+    };
+
     const imageHandler = (e) => {
-        axios.get(`http://localhost:5000/pet_id/${petName}/type/${type}`)
+        axios.get(`http://localhost:5000/pet_id/${petName}/type/${type}`, {
+            headers: headers
+        })
             .then(res => {
                 const data = new FormData();
                 data.append('file', e.target.files[0]);
                 data.append('id', parseInt(res.data));
-                axios.post(`http://localhost:5000/image_upload/${res.data}`, data);
+                axios.post(`http://localhost:5000/image_upload/${res.data}`, data, {
+                    headers: headers
+                });
             })
     }
 
@@ -81,13 +91,13 @@ function AdminForm() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ post: newPetData }),
         })
         const body = await response.text();
         setImgActive(true);
     }
-
 
     return (
         <div>

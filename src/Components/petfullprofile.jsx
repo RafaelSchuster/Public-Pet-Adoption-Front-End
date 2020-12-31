@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Alert, Button, Container, Form, FormControl, Col, Row, Navbar, Nav, } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { getPetById } from '../Api/api';
 import axios from 'axios';
 import NavBar from './navbar';
+import { MainContext } from '../Context/context';
 
 function PetFullProfile(props) {
     const [id, setId] = useState(props.match.params.id);
@@ -19,11 +20,23 @@ function PetFullProfile(props) {
     const [hypoalergenic, setHypoalergenic] = useState();
     const [dietRestrictions, setDietRestrictions] = useState();
     const [petBio, setPetBio] = useState();
+    const { token } = useContext(MainContext)
+
 
     useEffect(() => {
-        getPetById(id)
+        getPetById(token, id)
             .then(res => {
                 setThisPet(res);
+                setPetName(res.name);
+                setType(res.type);
+                setHeight(res.height);
+                setWeight(res.weight);
+                setBreed(res.breed);
+                setColor(res.color);
+                setPetStatus(res.petStatus);
+                setHypoalergenic(res.hypoalergenic);
+                setDietRestrictions(res.dietRestrictions);
+                setPetBio(res.petBio);
             })
             .catch(err => console.log(err));
     }, [])
@@ -62,13 +75,18 @@ function PetFullProfile(props) {
         const selected = e.target.value;
         setHypoalergenic(selected);
     }
+    const headers = {
+        'Authorization': `Bearer ${token} `
+    };
 
     const imageHandler = (e) => {
         const data = new FormData();
         e.target.files[0].id = id;
         data.append('file', e.target.files[0]);
         data.append('id', e.target.files[0].id);
-        axios.post(`http://localhost:5000/image_upload/${id}`, data);
+        axios.post(`http://localhost:5000/image_upload/${id}`, data, {
+            headers: headers
+        });
     }
 
     const petSubmitting = async (e) => {
@@ -90,6 +108,7 @@ function PetFullProfile(props) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ post: newPetData }),
         })

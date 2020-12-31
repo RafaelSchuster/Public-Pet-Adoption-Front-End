@@ -23,7 +23,7 @@ function Pets(props) {
                     <PetProfile id={id} />
                 </Tab>
                 <Tab eventKey="profile" title="Pet Status" className="tab-item pet-status">
-                    <PetStatus />
+                    <PetStatus id={id} />
                 </Tab>
                 <Tab eventKey="contact" title="Saved Pets" className="tab-item">
                 </Tab>

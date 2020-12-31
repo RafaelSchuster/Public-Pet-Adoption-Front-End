@@ -1,21 +1,24 @@
 import { Card, Nav, Button, Tabs, Tab } from 'react-bootstrap';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { getImgById, getPetById } from '../Api/api';
 import NavBar from './navbar';
+import { MainContext } from '../Context/context';
 
 function PetProfile(props) {
     const [thisPet, setThisPet] = useState({});
     const [imgPath, setImgPath] = useState();
+    const {token, setToken } = useContext(MainContext)
+
 
 
     useEffect(() => {
-        getPetById(props.id)
+        getPetById(token, props.id)
             .then(res => {
                 setThisPet(res);
             })
             .catch(err => console.log(err));
 
-        getImgById(props.id)
+        getImgById(token, props.id)
             .then(res => {
                 if (res) setImgPath(res.FileName);
             })

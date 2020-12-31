@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Card, Form, Alert, Button, Col } from 'react-bootstrap';
 import Modal from 'react-modal';
 import { MainContext } from '../Context/context';
+import axios from 'axios'
 
 
 function Login() {
@@ -18,7 +19,19 @@ function Login() {
     const { bio, setBio } = useContext(MainContext);
     const { password, setPassword } = useContext(MainContext);
     const { currentUser, setCurrentUser } = useContext(MainContext);
-    const{token, setToken} = useContext(MainContext)
+
+    const useLocalState = (localItem) => {
+        const [localToken, setState] = useState(localStorage.getItem(localItem))
+
+        const setLocalToken = (newItem) => {
+            localStorage.setItem(localItem, newItem)
+            setState(newItem)
+
+        }
+
+        return [localToken, setLocalToken]
+    }
+    const [token, setToken] = useLocalState('token')
 
 
     const changeFs = (e) => {
@@ -52,38 +65,46 @@ function Login() {
                 email: email,
                 password: password,
             }
-            const response = await fetch('http://localhost:5000/user_sign', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ post: newUserData }),
-            })
-            const body = await response.text();
-            if(body) window.location.href = 'http://localhost:3000'
-
+            try {
+                const response = await fetch('http://localhost:5000/user_sign', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ post: newUserData }),
+                })
+                const body = await response.json();
+                setToken(body.accessToken)
+                if (body.accessToken) window.location.href = 'http://localhost:3000'
+            } catch (error) {
+                setError('Unable to Sign Up. Please check your profile')
+            }
         }
         else return setError('Passwords do not match');
     }
     const submitLogin = async (e) => {
         e.preventDefault();
+        setError('')
         const loginUserData = {
             email: email,
             password: password,
         }
-        const response = await fetch('http://localhost:5000/userlogin', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ post: loginUserData }),
-        })
-        const body = await response.json();
-        console.log(body.accessToken)
-        setToken(body.accessToken)
-    //     setCurrentUser(body)
-    //     if(body) window.location.href = 'http://localhost:3000'     
-     }
+        try {
+            const response = await fetch('http://localhost:5000/userlogin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ post: loginUserData }),
+            })
+            const body = await response.json();
+            setToken(body.accessToken)
+            if (body.accessToken) window.location.href = 'http://localhost:3000'
+        } catch (error) {
+            setError('Unable to login. Please check your email and password')
+        }
+
+    }
 
     return (
         <>
@@ -109,6 +130,7 @@ function Login() {
                     <Card className='login-card'>
                         <Card.Body>
                             <h2 className="text-center mb-4">Log In</h2>
+                            {error && <Alert variant="danger">{error}</Alert>}
                             <Form onSubmit={(e) => submitLogin(e)}>
                                 <Form.Group id="email">
                                     <Form.Label>Email</Form.Label>

@@ -39,11 +39,12 @@ function App() {
   const [userPets, setUserPets] = useState();
   const [pets, setPets] = useState();
   const [basicSearchResults, setBasicSearchResults] = useState();
-  const [token, setToken] = useState()
+  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [refresher, setRefresher] = useState(false);
 
 
   useEffect(() => {
-    getUserApi()
+    getUserApi(token)
       .then(res => {
         setFirstName(res.firstName);
         setLastName(res.lastName);
@@ -53,15 +54,15 @@ function App() {
         setUserPets(res.petsOwned);
       })
       .catch(err => console.log(err));
-    getAllUsers()
+    getAllUsers(token)
       .then(res => {
         setUsers(res);
       })
-    getAllPets()
+    getAllPets(token)
       .then(res => {
         setAllPets(res);
       })
-  }, [currentUser])
+  }, [setToken, refresher])
 
 
   return (
@@ -79,7 +80,8 @@ function App() {
       userPets, setUserPets,
       pets, setPets,
       basicSearchResults, setBasicSearchResults,
-      token, setToken
+      token, setToken,
+      setRefresher
     }}>
       <Router>
         <Switch>

@@ -8,15 +8,23 @@ import { useContext } from 'react';
 import { MainContext } from '../Context/context';
 
 function PetCard(props) {
+    console.log(props)
     const [modalIsOpen1, setModalIsOpen1] = useState(false);
     const [imgPath, setImgPath] = useState();
     const { currentUser } = useContext(MainContext);
+    const { token, setToken } = useContext(MainContext);
+    const [adopted, setAdopted] = useState(false);
+    const [fostered, setFostered] = useState(false);
+
 
     useEffect(() => {
-        getImgById(props.id)
+        getImgById(token, props.id)
             .then(res => {
-                setImgPath(res.FileName);
+                if (res) setImgPath(res.FileName);
             })
+        if (props.petStatus == 'adopted') setAdopted(true)
+        else if (props.petStatus == 'fostered') setFostered(true);
+
     }, [currentUser])
 
     return (
@@ -26,8 +34,8 @@ function PetCard(props) {
                 <Card.Body>
                     <Card.Title>{props.name}</Card.Title>
                     <p>Adoption Status</p>
-                    {(props.adopted || props.fostered) && <Button variant="warning">Return</Button>}
-                    {!props.adopted && < Button variant="warning">Adopt</Button>}
+                    {(adopted || fostered) && <Button variant="warning">Return</Button>}
+                    {!adopted && < Button variant="warning">Adopt</Button>}
                 </Card.Body>
                 <Card.Footer>
                     <small className="text-muted">Last updated 3 mins ago</small>

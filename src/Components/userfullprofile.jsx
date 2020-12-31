@@ -5,7 +5,7 @@ import '../App.css';
 import { useContext } from 'react';
 import { MainContext } from '../Context/context';
 import { useState } from 'react';
-import { getUserById } from '../Api/api'
+import { getUserById } from '../Api/api';
 import NavBar from './navbar';
 
 
@@ -21,13 +21,13 @@ function UserFullProfile(props) {
     const { email, setEmail } = useContext(MainContext);
     const { telephone, setTelephone } = useContext(MainContext);
     const { bio, setBio } = useContext(MainContext);
-    const { userPets, setUserPets } = useContext(MainContext)
+    const { userPets, setUserPets } = useContext(MainContext);
+    const { token, setToken } = useContext(MainContext);
 
     useEffect(() => {
-        getUserById(id)
+        getUserById(token, id)
             .then(res => {
                 setThisUser(res);
-                console.log(thisUser)
             })
             .catch(err => console.log(err));
     }, [])
@@ -70,16 +70,16 @@ function UserFullProfile(props) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({ post: newUserData }),
         })
         const body = await response.text();
-        console.log(body)
     }
 
     return (
         <>
-        <NavBar/>
+            <NavBar />
             <h1 className="header-profile mb-5"> User Full Profile</h1>
             <a
                 href="/admindashboard"
