@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import PetProfile from './petprofile';
 import PetStatus from './petstatus';
 import NavBar from './navbar';
+import SavedPetsList from './savedPets';
 
 function Pets(props) {
     const [id, setId] = useState(props.match.params.id);
@@ -25,7 +26,8 @@ function Pets(props) {
                 <Tab eventKey="profile" title="Pet Status" className="tab-item pet-status">
                     <PetStatus id={id} />
                 </Tab>
-                <Tab eventKey="contact" title="Saved Pets" className="tab-item">
+                <Tab eventKey="saved" title="Saved Pets" className="tab-item">
+                    <SavedPetsList/>
                 </Tab>
             </Tabs>
         </div>

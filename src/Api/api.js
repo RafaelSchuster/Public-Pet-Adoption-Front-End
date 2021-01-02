@@ -77,7 +77,6 @@ export const getImgById = async (token, id) => {
   } catch (error) {
     console.log(error)
   }
-
 }
 
 export const searchPetByType = async (type) => {
@@ -97,5 +96,9 @@ export const advancedSearchPet = async (status, height, weight, type, name) => {
     console.log(error)
     return {'name' : '', 'type' : '', 'breed' : '' }
   }
+}
+
+export const savingPet = async (userId, petId) =>{
+
 
 }

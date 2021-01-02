@@ -7,9 +7,7 @@ import { MainContext } from '../Context/context';
 function PetProfile(props) {
     const [thisPet, setThisPet] = useState({});
     const [imgPath, setImgPath] = useState();
-    const {token, setToken } = useContext(MainContext)
-
-
+    const { token, setToken, userId, savedPets, setSavedPets, petsSaved, setPetsSaved, saved, setSaved } = useContext(MainContext);
 
     useEffect(() => {
         getPetById(token, props.id)
@@ -22,7 +20,42 @@ function PetProfile(props) {
             .then(res => {
                 if (res) setImgPath(res.FileName);
             })
-    }, [])
+    }, [petsSaved, savedPets, saved])
+
+    const onSavePet = async () => {
+        try {
+            const response = await fetch(`http://localhost:5000/save_pet/user/${userId}/pet/${props.id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ post: 'Saving Pet' }),
+            })
+            const body = await response.json();
+            setSavedPets(body);
+            setSaved(true);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const onUnSavePet = async () => {
+        try {
+            const response = await fetch(`http://localhost:5000/save_pet/user/${userId}/pet/${props.id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ post: 'Unsaving Pet' }),
+            })
+            const body = await response.json();
+            setSaved(false);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     return (
         <>
@@ -39,7 +72,8 @@ function PetProfile(props) {
                     <p>Hypoalergenic: {thisPet.hypoalergenic}</p>
                     <p>Dietary Restrictions: {thisPet.dietRestrictions}</p>
                     <img src="" alt="" />
-                    <Button type="button" variant="warning" >Save for Later</Button>
+                    {!saved && <Button type="button" variant="warning" onClick={() => { onSavePet() }}>Save for Later</Button>}
+                    {saved && <Button type="button" variant="warning" onClick={() => { onUnSavePet() }}>Click here to remove from Save List</Button>}
                 </div>
             </div>
         </>

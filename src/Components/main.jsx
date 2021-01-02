@@ -23,7 +23,8 @@ function Main() {
         <>
             <div className='main-div'>
                 <NavBar />
-                <h1 className="main-header mb-5"> {`Welcome ${firstName} ${lastName}`} </h1>
+                {(firstName && lastName) ? <h1 className="main-header mb-5"> {`Welcome ${firstName} ${lastName}!`} </h1> :
+                <h1 className="main-header mb-5"> {`Welcome!`} </h1>  }
                 <Form className="form-hp" onSubmit={e => basicSearching(e)}>
                     <FormControl
                         as="textarea"

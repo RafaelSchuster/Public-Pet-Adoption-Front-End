@@ -24,6 +24,7 @@ import PetFullProfile from './Components/petfullprofile';
 import BasicSearchResults from './Components/basicSearchResults';
 
 function App() {
+  const [userId, setUserId] = useState()
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState();
   const [firstName, setFirstName] = useState();
@@ -41,17 +42,21 @@ function App() {
   const [basicSearchResults, setBasicSearchResults] = useState();
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [refresher, setRefresher] = useState(false);
-
+  const [savedPets, setSavedPets] = useState();
+  const [petsSaved, setPetsSaved] = useState([]);
+  const [saved, setSaved] = useState();
 
   useEffect(() => {
     getUserApi(token)
       .then(res => {
+        setUserId(res.id)
         setFirstName(res.firstName);
         setLastName(res.lastName);
         setTelephone(res.telephone);
         setEmail(res.email);
         setBio(res.bio);
         setUserPets(res.petsOwned);
+        setSavedPets(res.petsSaved);
       })
       .catch(err => console.log(err));
     getAllUsers(token)
@@ -62,12 +67,12 @@ function App() {
       .then(res => {
         setAllPets(res);
       })
-  }, [setToken, refresher])
+  }, [setToken, refresher, saved])
 
 
   return (
     <MainContext.Provider value={{
-      users, setUsers,
+      users, setUsers, userId,
       firstName, setFirstName,
       lastName, setLastName,
       fostered, adopted, userPetStatus,
@@ -81,7 +86,9 @@ function App() {
       pets, setPets,
       basicSearchResults, setBasicSearchResults,
       token, setToken,
-      setRefresher
+      setRefresher, savedPets, setSavedPets,
+      petsSaved, setPetsSaved,
+      saved, setSaved
     }}>
       <Router>
         <Switch>
