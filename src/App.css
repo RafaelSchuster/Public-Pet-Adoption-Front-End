@@ -193,6 +193,11 @@
      padding-left: 20px;
  }
 
+ .head-status {
+     text-align: center;
+     width: 100%;
+ }
+
  .your-pet {
      display: inline-block;
      width: 150px;
@@ -206,7 +211,12 @@
 
  .my-card {
      max-width: 300px;
+     max-height: 600px;
      background-color: rgb(245, 234, 221) !important;
+ }
+
+ .img-card {
+     height: 230px;
  }
 
  .search-div {
@@ -499,4 +509,19 @@
      position: absolute;
      top: 0;
      left: 40%;
+ }
+
+ /* Advanced Search */
+
+ .adv-result {
+     position: relative;
+     width: 170%;
+     height: 100px;
+     left: -40%;
+     top: 100px !important;
+     border-radius: 6px;
+     background-color: chocolate;
+     color: white;
+     margin-bottom: 15px;
+     opacity: 92%;
  }

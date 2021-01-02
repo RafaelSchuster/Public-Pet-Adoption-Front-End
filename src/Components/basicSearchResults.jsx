@@ -23,7 +23,8 @@ function BasicSearchResults(props) {
     return (
         <>
             <NavBar />
-            <h1 className="header-admin mb-5"> Basic Search Results</h1>
+            {basicSearchResults && !basicSearchResults.length && <h1 className="header-admin mb-5">No Matches.Sorry!</h1>}
+            {basicSearchResults && basicSearchResults.length && <h1 className="header-admin mb-5">Basic Search Results!</h1>}
             <ul className="pet-list-admin basic-search">
                 {basicSearchResults && basicSearchResults.map(pet =>
                     <PetItem

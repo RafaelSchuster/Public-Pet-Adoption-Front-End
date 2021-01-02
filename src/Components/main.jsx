@@ -8,15 +8,15 @@ import { MainContext } from '../Context/context';
 
 function Main() {
     const { firstName, lastName } = useContext(MainContext);
-    const [typeSearch, setTypeSearch] = useState()
+    const [typeSearch, setTypeSearch] = useState();
 
     const handleTypeInput = (e) => {
-        setTypeSearch(e.target.value)
+        setTypeSearch(e.target.value);
     }
 
     const basicSearching = (e) => {
-        e.preventDefault()
-       javascript:window.location.href = `/basic_search_results/${typeSearch}`
+        e.preventDefault();
+       javascript:window.location.href = `/basic_search_results/${typeSearch}`;
     }
 
     return (
@@ -33,7 +33,6 @@ function Main() {
                         rows={1}
                         placeholder='Search Pets By Type...'
                         onChange={e => handleTypeInput(e)}
-                        required
                         >
                     </FormControl>
                     <Button className="btn btn-warning w-100" type="submit">Basic Search</Button>

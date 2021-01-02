@@ -3,7 +3,7 @@ import { Accordion, Card, useAccordionToggle, Button, Form, FormControl, Image, 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import { advancedSearchPet } from '../Api/api';
-import PetItem from './petitem';
+import AdvResultItem from './advSearchResults'
 
 const AccordionContext = React.createContext({});
 
@@ -62,11 +62,9 @@ function Toggle() {
         e.preventDefault();
         advancedSearchPet(adoption, height, weight, type, petName)
             .then(res => {
-                if (!res == false) setError('');
-                if (res == false) setError('Sorry! Pet Not Found');
+                console.log(res)
                 setAdvResult(res);
             })
-
     }
 
     const handleTypeInput = (e) => {
@@ -112,32 +110,32 @@ function Toggle() {
                                 <Form.Row>
                                     <Col>
                                         <Form.Group controlId="exampleForm.ControlSelect1">
-                                            <Form.Control as="select" onChange={selectValue => adoptSelect(selectValue)} required >
+                                            <Form.Control as="select" onChange={selectValue => adoptSelect(selectValue)}  >
                                                 <option></option>
                                                 <option value='adopted'>Adopted</option>
                                                 <option value='fostered'>Fostered</option>
-                                                <option value='none'>None of Above</option>
+                                                <option value='available'>Available</option>
                                             </Form.Control>
                                         </Form.Group>
                                     </Col>
                                     <Col>
-                                        <Form.Control type='number' placeholder="Height" onChange={e => addPetHeight(e)} required />
+                                        <Form.Control type='number' placeholder="Height in Cm" onChange={e => addPetHeight(e)} />
                                     </Col>
                                     <Col>
-                                        <Form.Control type='number' placeholder="Weight" onChange={e => addPetWeight(e)} required />
+                                        <Form.Control type='number' placeholder="Weight in Kg" onChange={e => addPetWeight(e)} />
                                     </Col>
                                 </Form.Row>
                                 <Form.Row >
                                     <Col>
                                         <Form.Group controlId="formGroupEmail">
                                             <Form.Label></Form.Label>
-                                            <Form.Control placeholder="Type" type="text" onChange={e => addPetType(e)} required />
+                                            <Form.Control placeholder="Type" type="text" onChange={e => addPetType(e)} />
                                         </Form.Group>
                                     </Col>
                                     <Col>
                                         <Form.Group controlId="formGroupPassword">
                                             <Form.Label></Form.Label>
-                                            <Form.Control placeholder="Name" type="text" onChange={e => addPetName(e)} required />
+                                            <Form.Control placeholder="Name" type="text" onChange={e => addPetName(e)} />
                                         </Form.Group>
                                     </Col>
                                 </Form.Row>
@@ -149,20 +147,25 @@ function Toggle() {
                     </Accordion.Collapse>
                 </Card>
             </Accordion>
-            {advResult && <PetItem key={Math.random()}
-                id={advResult.id}
-                name={advResult.name}
-                type={advResult.type}
-                color={advResult.color}
-                height={advResult.height}
-                weight={advResult.weight}
-                breed={advResult.breed}
-                adopted={advResult.adopted}
-                fostered={advResult.fostered}
-                hypoalergenic={advResult.hypoalergenic}
-                diet={advResult.dietRestrictions}
-                bio={advResult.bio}
-            />}
+            <ul>
+                {advResult && advResult.map(pet =>
+                    <AdvResultItem
+                        key={Math.random()}
+                        id={pet.id}
+                        name={pet.name}
+                        type={pet.type}
+                        color={pet.color}
+                        height={pet.height}
+                        weight={pet.weight}
+                        breed={pet.breed}
+                        adopted={pet.adopted}
+                        fostered={pet.fostered}
+                        hypoalergenic={pet.hypoalergenic}
+                        diet={pet.dietRestrictions}
+                        bio={pet.bio}
+                    />
+                )}
+            </ul>
         </>
     );
 }

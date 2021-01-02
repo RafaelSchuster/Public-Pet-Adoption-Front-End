@@ -10,6 +10,7 @@ function Login() {
     const [modalSignIsOpen, setModalSignIsOpen] = useState(false);
     const [password2, setPassword2] = useState();
     const [error, setError] = useState('');
+    const [error2, setError2] = useState('');
     const { newUser, setNewUser } = useContext(MainContext);
     const { users, setUsers } = useContext(MainContext);
     const { firstName, setFirstName } = useContext(MainContext);
@@ -84,7 +85,7 @@ function Login() {
     }
     const submitLogin = async (e) => {
         e.preventDefault();
-        setError('')
+        setError2('')
         const loginUserData = {
             email: email,
             password: password,
@@ -101,7 +102,7 @@ function Login() {
             setToken(body.accessToken)
             if (body.accessToken) window.location.href = 'http://localhost:3000'
         } catch (error) {
-            setError('Unable to login. Please check your email and password')
+            setError2('Unable to login. Please check your email and password')
         }
 
     }
@@ -130,7 +131,7 @@ function Login() {
                     <Card className='login-card'>
                         <Card.Body>
                             <h2 className="text-center mb-4">Log In</h2>
-                            {error && <Alert variant="danger">{error}</Alert>}
+                            {error2 && <Alert variant="danger">{error2}</Alert>}
                             <Form onSubmit={(e) => submitLogin(e)}>
                                 <Form.Group id="email">
                                     <Form.Label>Email</Form.Label>

@@ -146,11 +146,11 @@ function PetFullProfile(props) {
                         </Form.Row>
                         <Form.Row className="mt-3">
                             <Col>
-                                <Form.Control type="number" placeholder="Height"
+                                <Form.Control type="number" placeholder="Height in Cm"
                                     onChange={e => addPetHeight(e)} defaultValue={thisPet.height} />
                             </Col>
                             <Col>
-                                <Form.Control type="number" placeholder="Weight"
+                                <Form.Control type="number" placeholder="Weight in Kg"
                                     onChange={e => addPetWeight(e)} defaultValue={thisPet.weight} />
                             </Col>
                             <Col>

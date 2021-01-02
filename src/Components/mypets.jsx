@@ -35,8 +35,8 @@ function MyPets() {
                 <h1 className="header-profile mb-5"> Your Pets</h1>
             </div>
             <Card className="status">
-                {userPets? <Card.Body className="head-status">{`You have adopted ${userPets.length} Pets.`}</Card.Body> :
-                <Card.Body className="head-status">{`You have adopted 0 Pets.`}</Card.Body> }
+                {userPets? <Card.Body className="head-status">{`You have ${userPets.length} Pets.`}</Card.Body> :
+                <Card.Body className="head-status">{`You have 0 Pets.`}</Card.Body> }
             </Card>
             <Container className="my-pets">
                 <CardDeck className="deck">

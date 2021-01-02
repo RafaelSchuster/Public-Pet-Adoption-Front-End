@@ -125,10 +125,10 @@ function AdminForm() {
                     </Form.Row>
                     <Form.Row className="mt-3">
                         <Col>
-                            <Form.Control type="number" placeholder="Height" onChange={e => addPetHeight(e)} required />
+                            <Form.Control type="number" placeholder="Height in Cm" onChange={e => addPetHeight(e)} required />
                         </Col>
                         <Col>
-                            <Form.Control type="number" placeholder="Weight" onChange={e => addPetWeight(e)} required />
+                            <Form.Control type="number" placeholder="Weight in Kg" onChange={e => addPetWeight(e)} required />
                         </Col>
                         <Col>
                             <Form.Control placeholder="Breed" onChange={e => addPetBreed(e)} required />

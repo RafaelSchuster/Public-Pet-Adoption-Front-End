@@ -66,10 +66,10 @@ function PetProfile(props) {
                     <p>Type: {thisPet.type}</p>
                     <p>Breed: {thisPet.breed}</p>
                     <p>Color: {thisPet.color}</p>
-                    <p>Height: {thisPet.height}</p>
-                    <p>Weight: {thisPet.weight}</p>
+                    <p>Height in Cm: {thisPet.height}</p>
+                    <p>Weight in Kg: {thisPet.weight}</p>
                     <p>Bio: {thisPet.petBio}</p>
-                    <p>Hypoalergenic: {thisPet.hypoalergenic}</p>
+                    <p>Hypoallergenic: {thisPet.hypoalergenic}</p>
                     <p>Dietary Restrictions: {thisPet.dietRestrictions}</p>
                     <img src="" alt="" />
                     {!saved && <Button type="button" variant="warning" onClick={() => { onSavePet() }}>Save for Later</Button>}

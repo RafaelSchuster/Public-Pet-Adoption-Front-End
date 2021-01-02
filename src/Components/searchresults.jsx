@@ -16,6 +16,7 @@ function SearchResults() {
                         type={pet.type}
                     />
                 )}
+                
             </ul>
         </>
     )
