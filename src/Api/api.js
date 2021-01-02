@@ -94,11 +94,15 @@ export const advancedSearchPet = async (status, height, weight, type, name) => {
     return body;
   } catch (error) {
     console.log(error)
-    return {'name' : '', 'type' : '', 'breed' : '' }
+    return {
+      'name': '',
+      'type': '',
+      'breed': ''
+    }
   }
 }
 
-export const savingPet = async (userId, petId) =>{
+export const savingPet = async (userId, petId) => {
 
 
 }
