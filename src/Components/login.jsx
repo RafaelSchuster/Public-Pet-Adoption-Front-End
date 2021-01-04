@@ -67,16 +67,26 @@ function Login() {
                 password: password,
             }
             try {
-                const response = await fetch('http://localhost:5000/user_sign', {
-                    method: 'POST',
+                const checkDupes = await fetch(`http://localhost:5000/checkdupes/${email}`, {
+                    method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ post: newUserData }),
+                    }
                 })
-                const body = await response.json();
-                setToken(body.accessToken)
-                if (body.accessToken) window.location.href = 'http://localhost:3000'
+                const bodyDupe = await checkDupes.json();
+                if(bodyDupe.length > 0) setError("There is an account with this email already")
+                else if (bodyDupe.length == 0) {
+                    const response = await fetch('http://localhost:5000/user_sign', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ post: newUserData }),
+                    })
+                    const body = await response.json();
+                    setToken(body.accessToken)
+                    if (body.accessToken) window.location.href = 'http://localhost:3000'
+                }
             } catch (error) {
                 setError('Unable to Sign Up. Please check your profile')
             }
