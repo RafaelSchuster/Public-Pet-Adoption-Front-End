@@ -12,16 +12,17 @@ import NavBar from './Components/navbar';
 import MyPets from './Components/mypets';
 import Pets from './Components/pets';
 import Search from './Components/search';
-import SearchResults from './Components/searchresults';
 import AdminForm from './Components/adminform';
 import AdminDashboard from './Components/admindash';
 import { MainContext } from './Context/context';
 import Login from './Components/login';
 import Edit from './Components/edit';
-import { getUserApi, getAllUsers, getAllPets } from '../src/Api/api.js';
+import { getUserApi, getAllUsers, getAllPets, getAdminApi } from '../src/Api/api.js';
 import UserFullProfile from './Components/userfullprofile';
 import PetFullProfile from './Components/petfullprofile';
 import BasicSearchResults from './Components/basicSearchResults';
+import AdminLogin from './Components/adminLogin';
+import { ProtectedRoute } from './Components/protectedRoute';
 
 function App() {
   const [userId, setUserId] = useState()
@@ -45,6 +46,7 @@ function App() {
   const [savedPets, setSavedPets] = useState();
   const [petsSaved, setPetsSaved] = useState([]);
   const [saved, setSaved] = useState();
+  const [admin, setAdmin] = useState();
 
   useEffect(() => {
     getUserApi(token)
@@ -57,6 +59,7 @@ function App() {
         setBio(res.bio);
         setUserPets(res.petsOwned);
         setSavedPets(res.petsSaved);
+        setAdmin(res.admin)
       })
       .catch(err => console.log(err));
     getAllUsers(token)
@@ -67,7 +70,7 @@ function App() {
       .then(res => {
         setAllPets(res);
       })
-  }, [setToken, refresher, saved])
+  }, [token, refresher, saved])
 
 
   return (
@@ -88,7 +91,8 @@ function App() {
       token, setToken,
       setRefresher, savedPets, setSavedPets,
       petsSaved, setPetsSaved,
-      saved, setSaved
+      saved, setSaved,
+      admin
     }}>
       <Router>
         <Switch>
@@ -125,16 +129,16 @@ function App() {
           </Route>
         </Switch>
         <Switch>
-          <Route path="/admin">
+          <ProtectedRoute exact path="/admin" component={AdminForm} admin = {admin} />
+        </Switch>
+        <Switch>
+          <Route path="/adminlogin">
             <NavBar />
-            <AdminForm />
+            <AdminLogin />
           </Route>
         </Switch>
         <Switch>
-          <Route path="/admindashboard">
-            <NavBar />
-            <AdminDashboard />
-          </Route>
+          <ProtectedRoute path="/admindashboard" component={AdminDashboard} admin = {admin} />
         </Switch>
         <Switch>
           <Route path="/logged_out">

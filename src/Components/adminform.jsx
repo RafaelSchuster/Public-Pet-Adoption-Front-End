@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
 import axios from 'axios';
 import { MainContext } from '../Context/context';
+import NavBar from './navbar';
 
 
 function AdminForm() {
@@ -100,6 +101,8 @@ function AdminForm() {
     }
 
     return (
+        <>
+        <NavBar/>
         <div>
             <h1 className="header-admin mb-5"> Admin Pet's Upload Form</h1>
             <a
@@ -180,6 +183,7 @@ function AdminForm() {
                 </Form>
             </Container>
         </div>
+        </>
     )
 
 }

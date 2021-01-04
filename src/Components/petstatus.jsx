@@ -1,11 +1,11 @@
-import { Card, Nav, Button, Tabs, Tab } from 'react-bootstrap';
+import {Button } from 'react-bootstrap';
 import React, { useContext, useEffect, useState } from 'react';
 import { MainContext } from '../Context/context';
-import { getPetById, getUserById } from '../Api/api';
+import { getPetById } from '../Api/api';
 
 function PetStatus(props) {
     const [thisPet, setThisPet] = useState({});
-    const { token, email, userPets, refresher, setRefresher } = useContext(MainContext);
+    const { token, email, userPets, setRefresher } = useContext(MainContext);
     const [adopted, setAdopted] = useState('');
     const [fostered, setFostered] = useState('');
     const [owner, setOwner] = useState(false)

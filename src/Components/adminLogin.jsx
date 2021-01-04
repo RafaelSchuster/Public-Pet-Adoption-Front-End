@@ -5,7 +5,7 @@ import { MainContext } from '../Context/context';
 import axios from 'axios'
 
 
-function Login() {
+function AdminLogin() {
     const [modalLoginIsOpen, setModalLoginIsOpen] = useState(false);
     const [modalSignIsOpen, setModalSignIsOpen] = useState(false);
     const [password2, setPassword2] = useState();
@@ -16,8 +16,7 @@ function Login() {
     const { email, setEmail } = useContext(MainContext);
     const { telephone, setTelephone } = useContext(MainContext);
     const { password, setPassword } = useContext(MainContext);
-    const { admin, setAdmin } = useContext(MainContext);
-
+    const {admin, setAdmin, setRefresher} = useContext(MainContext);
 
     const useLocalState = (localItem) => {
         const [localToken, setState] = useState(localStorage.getItem(localItem))
@@ -25,14 +24,12 @@ function Login() {
         const setLocalToken = (newItem) => {
             localStorage.setItem(localItem, newItem)
             setState(newItem)
-
         }
 
         return [localToken, setLocalToken]
     }
     const [token, setToken] = useLocalState('token')
     const [administrator, setAdministrator] = useLocalState('admin')
-
 
 
     const changeFs = (e) => {
@@ -59,7 +56,7 @@ function Login() {
         e.preventDefault();
         if (password === password2) {
             setError('');
-            const newUserData = {
+            const newAdminData = {
                 firstName: firstName,
                 lastName: lastName,
                 telephone: telephone,
@@ -67,29 +64,31 @@ function Login() {
                 password: password,
             }
             try {
-                const checkDupes = await fetch(`http://localhost:5000/checkdupes/${email}`, {
+                const checkDupes = await fetch(`http://localhost:5000/checkdupes/admin/${email}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 })
                 const bodyDupe = await checkDupes.json();
-                if(bodyDupe.length > 0) setError("There is an account with this email already")
+                if (bodyDupe.length > 0) setError("There is an account with this email already")
                 else if (bodyDupe.length == 0) {
-                    const response = await fetch('http://localhost:5000/user_sign', {
+                    const response = await fetch('http://localhost:5000/admin_sign', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ post: newUserData }),
+                        body: JSON.stringify({ post: newAdminData }),
                     })
                     const body = await response.json();
-                    setToken(body.accessToken)
-                    setAdministrator(false)
+                    setToken(body.accessToken);
+                    setAdministrator(true)
                     if (body.accessToken){
-                         window.location.href = 'http://localhost:3000'
-                         setAdmin(false);
-                    }
+                        window.location.href = 'http://localhost:3000/admindashboard';
+                        setAdmin(true);
+                        setRefresher(true)
+
+                    }     
                 }
             } catch (error) {
                 setError('Unable to Sign Up. Please check your profile')
@@ -105,7 +104,7 @@ function Login() {
             password: password,
         }
         try {
-            const response = await fetch('http://localhost:5000/userlogin', {
+            const response = await fetch('http://localhost:5000/adminlogin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -114,41 +113,32 @@ function Login() {
             })
             const body = await response.json();
             setToken(body.accessToken)
-            setAdministrator(false)
+            setAdministrator(true)
             if (body.accessToken){
-                window.location.href = 'http://localhost:3000'
-                setAdmin(false);
+                window.location.href = 'http://localhost:3000/admindashboard'
+                setAdmin(true);
+                setRefresher(true)
+                
             } 
+            
         } catch (error) {
             setError2('Unable to login. Please check your email and password')
         }
-
     }
 
     return (
         <>
             <div className='logged-out'>
-                <h1>Welcome To RentaPET</h1>
-                <p className="description">RentaPET is more than a service. It is where you come to show your love for pets.
-                Here you will find all you might want to know about your pet, and let's not forget... Your next pet too.
-                We do the utmost effort to offer you the most accurate information about our animals,
-                and we give you also many options regarding fostering and adopting pets.
-                As they say, animals have feelings too and they need our support.
-                After all this world is for us to live together, isn't it?
-                So please Login if you have an account, if not, just make one! And start browsing in our website,
-                your next pet might be just one click away from his next home!
-                Good petting!
-                 </p>
-                <Button type="button" variant="warning" onClick={() => setModalLoginIsOpen(true)}>Login</Button>
-                <Button type="button" variant="warning" onClick={() => setModalSignIsOpen(true)}>Sign Up</Button>
-                <a href="/search" className="btn btn-warning" >Search Page</a>
+                <h1>Admin Login</h1>
+                <Button type="button" variant="warning" onClick={() => setModalLoginIsOpen(true)}>Admin Login</Button>
+                <Button type="button" variant="warning" onClick={() => setModalSignIsOpen(true)}>Admin Sign Up</Button>
                 <Modal className="logged-out-modal"
                     isOpen={modalLoginIsOpen}
                     onRequestClose={() => setModalLoginIsOpen(false)}
                 >
                     <Card className='login-card'>
                         <Card.Body>
-                            <h2 className="text-center mb-4">Log In</h2>
+                            <h2 className="text-center mb-4">Admin Log In</h2>
                             {error2 && <Alert variant="danger">{error2}</Alert>}
                             <Form onSubmit={(e) => submitLogin(e)}>
                                 <Form.Group id="email">
@@ -159,7 +149,7 @@ function Login() {
                                     <Form.Label>Password</Form.Label>
                                     <Form.Control type="password" required onChange={e => changePassword(e)}></Form.Control>
                                 </Form.Group>
-                                <Button className="w-100" type="submit" variant='success'>Log In</Button>
+                                <Button className="w-100" type="submit" variant='success'>Admin Log In</Button>
                             </Form>
                         </Card.Body>
                     </Card>
@@ -169,7 +159,7 @@ function Login() {
                     onRequestClose={() => setModalSignIsOpen(false)}
                 >
                     <Card className='sign-card'>
-                        <Card.Body><h2 className="text-center mb-5 sign-header">Sign-Up</h2></Card.Body>
+                        <Card.Body><h2 className="text-center mb-5 sign-header">Admin Sign-Up</h2></Card.Body>
                         {error && <Alert variant="danger">{error}</Alert>}
                         <Form onSubmit={(e) => submitSignUp(e)} >
                             <Form.Row>
@@ -204,7 +194,7 @@ function Login() {
                                 <Form.Label>Password Confirmation</Form.Label>
                                 <Form.Control type="password" required onChange={e => changePassword2(e)} ></Form.Control>
                             </Form.Group>
-                            <Button className="w-100" type="submit" variant='success'>Sign Up</Button>
+                            <Button className="w-100" type="submit" variant='success'>Admin Sign Up</Button>
                         </Form>
                     </Card>
                 </Modal>
@@ -212,4 +202,4 @@ function Login() {
         </>
     )
 }
-export default Login;
+export default AdminLogin;

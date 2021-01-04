@@ -3,11 +3,14 @@ import { Card, Nav, Button, Tabs, Tab } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UsersList from './userlist';
 import PetsList from './petslist';
+import NavBar from './navbar';
 
 function AdminDashboard() {
     const [key, setKey] = useState('home');
 
     return (
+        <>
+        <NavBar/>
         <div>
             <h1 className="text-center pet-page">Admin Dashboard</h1>
             <Tabs
@@ -23,6 +26,7 @@ function AdminDashboard() {
                 </Tab>
             </Tabs>
         </div>
+        </>
     )
 
 }

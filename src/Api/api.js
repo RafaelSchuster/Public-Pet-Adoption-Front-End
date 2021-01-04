@@ -1,14 +1,49 @@
 export const getUserApi = async (token) => {
-  const response = await fetch('http://localhost:5000/userlogin', {
+  try {
+    const response = await fetch('http://localhost:5000/userlogin', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token} `
+      }
+    })
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    console.log(body)
+    return body;
+  } catch (error) {
+    const response = await fetch('http://localhost:5000/adminlogin', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token} `
+      }
+    })
+    const body = await response.json();
+    console.log(body)
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  }
+
+}
+export const getAdminApi = async (token) => {
+  try {
+    const response = await fetch('http://localhost:5000/adminlogin', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token} `
     }
   })
+  console.log('yes')
   const body = await response.json();
+  console.log(body)
   if (response.status !== 200) throw Error(body.message);
   return body;
+  } catch (error) {
+    return false
+  }
+  
 }
 
 export const getAllUsers = async (token) => {
@@ -36,6 +71,7 @@ export const getAllPets = async (token) => {
   if (response.status !== 200) throw Error(body.message);
   return body;
 }
+
 export const getUserById = async (token, id) => {
   const response = await fetch(`http://localhost:5000/users/${id}`, {
     method: 'GET',
@@ -100,9 +136,4 @@ export const advancedSearchPet = async (status, height, weight, type, name) => {
       'breed': ''
     }
   }
-}
-
-export const savingPet = async (userId, petId) => {
-
-
 }
