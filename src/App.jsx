@@ -51,7 +51,7 @@ function App() {
   useEffect(() => {
     getUserApi(token)
       .then(res => {
-        setUserId(res.id)
+        setUserId(res.id);
         setFirstName(res.firstName);
         setLastName(res.lastName);
         setTelephone(res.telephone);
@@ -59,7 +59,7 @@ function App() {
         setBio(res.bio);
         setUserPets(res.petsOwned);
         setSavedPets(res.petsSaved);
-        setAdmin(res.admin)
+        setAdmin(res.admin);
       })
       .catch(err => console.log(err));
     getAllUsers(token)
@@ -103,10 +103,7 @@ function App() {
           </Route>
         </Switch>
         <Switch>
-          <Route path='/profile'>
-            <NavBar />
-            <Profile />
-          </Route>
+          <Route path='/profile/:id' component={Profile} />
         </Switch>
         <Switch>
           <Route path="/mypets">
@@ -129,7 +126,7 @@ function App() {
           </Route>
         </Switch>
         <Switch>
-          <ProtectedRoute exact path="/admin" component={AdminForm} admin = {admin} />
+          <ProtectedRoute exact path="/admin" component={AdminForm} admin={admin} />
         </Switch>
         <Switch>
           <Route path="/adminlogin">
@@ -138,7 +135,7 @@ function App() {
           </Route>
         </Switch>
         <Switch>
-          <ProtectedRoute path="/admindashboard" component={AdminDashboard} admin = {admin} />
+          <ProtectedRoute path="/admindashboard" component={AdminDashboard} admin={admin} />
         </Switch>
         <Switch>
           <Route path="/logged_out">

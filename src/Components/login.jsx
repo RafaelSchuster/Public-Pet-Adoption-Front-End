@@ -20,20 +20,15 @@ function Login() {
 
 
     const useLocalState = (localItem) => {
-        const [localToken, setState] = useState(localStorage.getItem(localItem))
-
+        const [localToken, setState] = useState(localStorage.getItem(localItem));
         const setLocalToken = (newItem) => {
-            localStorage.setItem(localItem, newItem)
-            setState(newItem)
-
+            localStorage.setItem(localItem, newItem);
+            setState(newItem);
         }
-
-        return [localToken, setLocalToken]
+        return [localToken, setLocalToken];
     }
-    const [token, setToken] = useLocalState('token')
-    const [administrator, setAdministrator] = useLocalState('admin')
-
-
+    const [token, setToken] = useLocalState('token');
+    const [administrator, setAdministrator] = useLocalState('admin');
 
     const changeFs = (e) => {
         setFirstName(e.target.value);
@@ -57,6 +52,7 @@ function Login() {
     }
     const submitSignUp = async (e) => {
         e.preventDefault();
+        let body;
         if (password === password2) {
             setError('');
             const newUserData = {
@@ -74,7 +70,7 @@ function Login() {
                     }
                 })
                 const bodyDupe = await checkDupes.json();
-                if(bodyDupe.length > 0) setError("There is an account with this email already")
+                if (bodyDupe.length > 0) setError("There is an account with this email already")
                 else if (bodyDupe.length == 0) {
                     const response = await fetch('http://localhost:5000/user_sign', {
                         method: 'POST',
@@ -83,22 +79,26 @@ function Login() {
                         },
                         body: JSON.stringify({ post: newUserData }),
                     })
-                    const body = await response.json();
-                    setToken(body.accessToken)
-                    setAdministrator(false)
-                    if (body.accessToken){
-                         window.location.href = 'http://localhost:3000'
-                         setAdmin(false);
+                    body = await response.json();
+                    if (body.accessToken.length > 0) {
+                        setToken(body.accessToken);
+                        setAdministrator(false);
+                        window.location.href = 'http://localhost:3000';
+                        setAdmin(false);
+                    }
+                    else {
+                        setError(body);
                     }
                 }
             } catch (error) {
-                setError('Unable to Sign Up. Please check your profile')
+                setError(body);
             }
         }
         else return setError('Passwords do not match');
     }
     const submitLogin = async (e) => {
         e.preventDefault();
+        let body;
         setError2('')
         const loginUserData = {
             email: email,
@@ -112,17 +112,19 @@ function Login() {
                 },
                 body: JSON.stringify({ post: loginUserData }),
             })
-            const body = await response.json();
-            setToken(body.accessToken)
-            setAdministrator(false)
-            if (body.accessToken){
-                window.location.href = 'http://localhost:3000'
+            body = await response.json();
+            if (body.accessToken.length > 0) {
+                setToken(body.accessToken);
+                setAdministrator(false);
+                window.location.href = 'http://localhost:3000';
                 setAdmin(false);
-            } 
+            }
+            else {
+                setError(body);
+            }
         } catch (error) {
-            setError2('Unable to login. Please check your email and password')
+            setError2(body);
         }
-
     }
 
     return (

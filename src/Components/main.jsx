@@ -9,6 +9,7 @@ import { MainContext } from '../Context/context';
 function Main() {
     const { firstName, lastName } = useContext(MainContext);
     const [typeSearch, setTypeSearch] = useState();
+    const { userId } = useContext(MainContext);
 
     const handleTypeInput = (e) => {
         setTypeSearch(e.target.value);
@@ -16,7 +17,7 @@ function Main() {
 
     const basicSearching = (e) => {
         e.preventDefault();
-       javascript:window.location.href = `/basic_search_results/${typeSearch}`;
+        javascript: window.location.href = `/basic_search_results/${typeSearch}`;
     }
 
     return (
@@ -24,7 +25,7 @@ function Main() {
             <div className='main-div'>
                 <NavBar />
                 {(firstName && lastName) ? <h1 className="main-header mb-5"> {`Welcome ${firstName} ${lastName}!`} </h1> :
-                <h1 className="main-header mb-5"> {`Welcome!`} </h1>  }
+                    <h1 className="main-header mb-5"> {`Welcome!`} </h1>}
                 <Form className="form-hp" onSubmit={e => basicSearching(e)}>
                     <FormControl
                         as="textarea"
@@ -33,7 +34,7 @@ function Main() {
                         rows={1}
                         placeholder='Search Pets By Type...'
                         onChange={e => handleTypeInput(e)}
-                        >
+                    >
                     </FormControl>
                     <Button className="btn btn-warning w-100" type="submit">Basic Search</Button>
                     <a href="/search" className="btn btn-success w-100 mt-2" >To The Search Page</a>
@@ -49,7 +50,7 @@ function Main() {
                         <Card.Text className="mt-5 mb-3">
                             Your Profile! We've got your back!
                     </Card.Text>
-                        <Card.Link href="/profile" className="w-100 btn btn-warning" variant="warning">Go to My Profile</Card.Link>
+                        <Card.Link href={`/profile/${userId}`} className="w-100 btn btn-warning" variant="warning">Go to My Profile</Card.Link>
                     </Card.Body>
                 </Card>
             </div>

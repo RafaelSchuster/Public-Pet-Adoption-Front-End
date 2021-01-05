@@ -10,22 +10,22 @@ function AdminDashboard() {
 
     return (
         <>
-        <NavBar/>
-        <div>
-            <h1 className="text-center pet-page">Admin Dashboard</h1>
-            <Tabs
-                className="tab-pets"
-                activeKey={key}
-                onSelect={(k) => setKey(k)}
-            >
-                <Tab eventKey="home" title="All Users" className="tab-item" >
-                    <UsersList />
-                </Tab>
-                <Tab eventKey="profile" title="All Pets" className="tab-item pet-status">
-                    <PetsList />
-                </Tab>
-            </Tabs>
-        </div>
+            <NavBar />
+            <div>
+                <h1 className="text-center pet-page">Admin Dashboard</h1>
+                <Tabs
+                    className="tab-pets"
+                    activeKey={key}
+                    onSelect={(k) => setKey(k)}
+                >
+                    <Tab eventKey="home" title="All Users" className="tab-item" >
+                        <UsersList />
+                    </Tab>
+                    <Tab eventKey="profile" title="All Pets" className="tab-item pet-status">
+                        <PetsList />
+                    </Tab>
+                </Tabs>
+            </div>
         </>
     )
 

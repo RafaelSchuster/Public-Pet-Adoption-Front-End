@@ -47,9 +47,9 @@ function UserFullProfile(props) {
         setEmail(e.target.value);
     }
     const changePets = (e) => {
-        const str = e.target.value
-        let arrPets = str.split(',')
-        setUserPets(arrPets)
+        const str = e.target.value;
+        let arrPets = str.split(',');
+        setUserPets(arrPets);
     }
     const changeBio = (e) => {
         setBio(e.target.value);
@@ -57,6 +57,7 @@ function UserFullProfile(props) {
 
     const submitprofile = async (e) => {
         e.preventDefault();
+        let body;
         const newUserData = {
             id: id,
             firstName: firstName,
@@ -66,15 +67,20 @@ function UserFullProfile(props) {
             petsOwned: userPets,
             bio: bio
         }
-        const response = await fetch('http://localhost:5000/user_admin_edit', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ post: newUserData }),
-        })
-        const body = await response.text();
+        try {
+            const response = await fetch('http://localhost:5000/user_admin_edit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ post: newUserData }),
+            })
+            body = await response.json();
+            setError(body);
+        } catch (error) {
+            setError(body);
+        }
     }
 
     return (
@@ -90,6 +96,7 @@ function UserFullProfile(props) {
                 Click Here To Admin's Dashboard
             </a>
             <Container className="container-profile">
+                {error && <Alert variant="danger">{error}</Alert>}
                 <Form onSubmit={e => submitprofile(e)}>
                     <Form.Row>
                         <Col>

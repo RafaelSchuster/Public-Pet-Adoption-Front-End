@@ -16,20 +16,20 @@ function AdminLogin() {
     const { email, setEmail } = useContext(MainContext);
     const { telephone, setTelephone } = useContext(MainContext);
     const { password, setPassword } = useContext(MainContext);
-    const {admin, setAdmin, setRefresher} = useContext(MainContext);
+    const { admin, setAdmin, setRefresher } = useContext(MainContext);
 
     const useLocalState = (localItem) => {
-        const [localToken, setState] = useState(localStorage.getItem(localItem))
+        const [localToken, setState] = useState(localStorage.getItem(localItem));
 
         const setLocalToken = (newItem) => {
-            localStorage.setItem(localItem, newItem)
-            setState(newItem)
+            localStorage.setItem(localItem, newItem);
+            setState(newItem);
         }
 
-        return [localToken, setLocalToken]
+        return [localToken, setLocalToken];
     }
-    const [token, setToken] = useLocalState('token')
-    const [administrator, setAdministrator] = useLocalState('admin')
+    const [token, setToken] = useLocalState('token');
+    const [administrator, setAdministrator] = useLocalState('admin');
 
 
     const changeFs = (e) => {
@@ -54,6 +54,7 @@ function AdminLogin() {
     }
     const submitSignUp = async (e) => {
         e.preventDefault();
+        let body;
         if (password === password2) {
             setError('');
             const newAdminData = {
@@ -80,24 +81,26 @@ function AdminLogin() {
                         },
                         body: JSON.stringify({ post: newAdminData }),
                     })
-                    const body = await response.json();
-                    setToken(body.accessToken);
-                    setAdministrator(true)
-                    if (body.accessToken){
+                    body = await response.json();
+                    if (body.accessToken.length > 0) {
+                        setToken(body.accessToken);
+                        setAdministrator(true);
                         window.location.href = 'http://localhost:3000/admindashboard';
-                        setAdmin(true);
-                        setRefresher(true)
-
-                    }     
+                        setRefresher(true);
+                    }
+                    else {
+                        setError(body);
+                    }
                 }
             } catch (error) {
-                setError('Unable to Sign Up. Please check your profile')
+                setError(body);
             }
         }
         else return setError('Passwords do not match');
     }
     const submitLogin = async (e) => {
         e.preventDefault();
+        let body;
         setError2('')
         const loginUserData = {
             email: email,
@@ -111,18 +114,20 @@ function AdminLogin() {
                 },
                 body: JSON.stringify({ post: loginUserData }),
             })
-            const body = await response.json();
-            setToken(body.accessToken)
-            setAdministrator(true)
-            if (body.accessToken){
-                window.location.href = 'http://localhost:3000/admindashboard'
-                setAdmin(true);
-                setRefresher(true)
-                
-            } 
-            
+            body = await response.json();
+
+            if (body.accessToken.length > 0) {
+                setToken(body.accessToken);
+                setAdministrator(true);
+                window.location.href = 'http://localhost:3000/admindashboard';
+                setRefresher(true);
+            }
+            else {
+                setError2(body);
+            }
+
         } catch (error) {
-            setError2('Unable to login. Please check your email and password')
+            setError2(body);
         }
     }
 

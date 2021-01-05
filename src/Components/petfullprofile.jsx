@@ -9,6 +9,7 @@ import { MainContext } from '../Context/context';
 
 function PetFullProfile(props) {
     const [id, setId] = useState(props.match.params.id);
+    const [error, setError] = useState();
     const [thisPet, setThisPet] = useState({});
     const [petName, setPetName] = useState();
     const [type, setType] = useState();
@@ -20,7 +21,7 @@ function PetFullProfile(props) {
     const [hypoalergenic, setHypoalergenic] = useState();
     const [dietRestrictions, setDietRestrictions] = useState();
     const [petBio, setPetBio] = useState();
-    const { token } = useContext(MainContext)
+    const { token } = useContext(MainContext);
 
 
     useEffect(() => {
@@ -91,6 +92,7 @@ function PetFullProfile(props) {
 
     const petSubmitting = async (e) => {
         e.preventDefault();
+        let body;
         const newPetData = {
             id: id,
             name: petName,
@@ -104,15 +106,20 @@ function PetFullProfile(props) {
             dietRestrictions: dietRestrictions,
             petBio: petBio
         }
-        const response = await fetch('http://localhost:5000/pet_admin_edit', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ post: newPetData }),
-        })
-        const body = await response.text();
+        try {
+            const response = await fetch('http://localhost:5000/pet_admin_edit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ post: newPetData }),
+            })
+            body = await response.json();
+            setError(body);
+        } catch (error) {
+            setError(body);
+        }
     }
 
     return (
@@ -129,6 +136,7 @@ function PetFullProfile(props) {
                     Click Here To Admin's Dashboard
             </a>
                 <Container className="container-profile admin-prof">
+                    {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={e => petSubmitting(e)} encType="multipart/form-data">
                         <Form.Row>
                             <Col>

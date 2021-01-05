@@ -29,21 +29,19 @@ export const getUserApi = async (token) => {
 export const getAdminApi = async (token) => {
   try {
     const response = await fetch('http://localhost:5000/adminlogin', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token} `
-    }
-  })
-  console.log('yes')
-  const body = await response.json();
-  console.log(body)
-  if (response.status !== 200) throw Error(body.message);
-  return body;
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token} `
+      }
+    })
+    const body = await response.json();
+    console.log(body)
+    if (response.status !== 200) throw Error(body.message);
+    return body;
   } catch (error) {
-    return false
+    return false;
   }
-  
 }
 
 export const getAllUsers = async (token) => {

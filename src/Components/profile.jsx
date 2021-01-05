@@ -5,9 +5,11 @@ import '../App.css';
 import { useContext } from 'react';
 import { MainContext } from '../Context/context';
 import { useState } from 'react';
+import NavBar from './navbar';
 
 
-function Profile() {
+function Profile(props) {
+    const [id] = useState(props.match.params.id);
     const [error, setError] = useState();
     const { newUser, setNewUser } = useContext(MainContext);
     const { users, setUsers } = useContext(MainContext);
@@ -17,7 +19,7 @@ function Profile() {
     const { telephone, setTelephone } = useContext(MainContext);
     const { bio, setBio } = useContext(MainContext);
     const { password, setPassword } = useContext(MainContext);
-    const {token} = useContext(MainContext)
+    const { token } = useContext(MainContext);
 
     const changeFs = (e) => {
         setFirstName(e.target.value);
@@ -42,7 +44,9 @@ function Profile() {
 
     const submitprofile = async (e) => {
         e.preventDefault();
+        let body;
         const newUserData = {
+            id: id,
             firstName: firstName,
             lastName: lastName,
             telephone: telephone,
@@ -50,22 +54,28 @@ function Profile() {
             password: password,
             bio: bio
         }
-        const response = await fetch('http://localhost:5000/userprofile', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization' : `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic0BzIiwiaWF0IjoxNjA5Mjc2MzA1fQ.0WeE-JMB1CP9smIM1CIXD1-audVt6cze35lKrMrtEVo `
-            },
-            body: JSON.stringify({ post: newUserData }),
-        })
-        const body = await response.text();
+        try {
+            const response = await fetch('http://localhost:5000/userprofile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic0BzIiwiaWF0IjoxNjA5Mjc2MzA1fQ.0WeE-JMB1CP9smIM1CIXD1-audVt6cze35lKrMrtEVo `
+                },
+                body: JSON.stringify({ post: newUserData }),
+            })
+            body = await response.json();
+            setError(body);
+        } catch (error) {
+            setError(body);
+        }
     }
 
     return (
         <>
+            <NavBar />
             <h1 className="header-profile mb-5"> Your Profile</h1>
             <Container className="container-profile">
-                {/* {error && <Alert variant="danger">{error}</Alert>} */}
+                {error && <Alert variant="danger">{error}</Alert>}
                 <Form onSubmit={e => submitprofile(e)}>
                     <Form.Row>
                         <Col>
