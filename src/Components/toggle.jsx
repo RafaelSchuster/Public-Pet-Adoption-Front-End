@@ -92,7 +92,7 @@ function Toggle() {
                                     id='basic'
                                     rows={2}
                                     onChange={e => handleTypeInput(e)}
-                                    placeholder='Search Pets By Type...' required>
+                                    placeholder='Search Pets By Type...' >
                                 </FormControl>
                                 <Button className="btn btn-success w-100 basic-btn" variant='success' type="submit"  >Basic Search By Type</Button>
                             </Form>

@@ -80,10 +80,13 @@ function Login() {
                         body: JSON.stringify({ post: newUserData }),
                     })
                     body = await response.json();
+                    console.log(body.accessToken)
                     if (body.accessToken.length > 0) {
                         setToken(body.accessToken);
                         setAdministrator(false);
-                        window.location.href = 'http://localhost:3000';
+                        setTimeout(()=>{
+                            window.location.href = 'http://localhost:3000';
+                        },2000)
                         setAdmin(false);
                     }
                     else {
@@ -113,10 +116,13 @@ function Login() {
                 body: JSON.stringify({ post: loginUserData }),
             })
             body = await response.json();
+            console.log(body.accessToken)
             if (body.accessToken.length > 0) {
                 setToken(body.accessToken);
                 setAdministrator(false);
-                window.location.href = 'http://localhost:3000';
+                setTimeout(()=>{
+                    window.location.href = 'http://localhost:3000';
+                },2000)
                 setAdmin(false);
             }
             else {

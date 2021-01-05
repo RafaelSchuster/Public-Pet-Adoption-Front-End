@@ -1,10 +1,12 @@
-import { Card, Nav, Button, Tabs, Tab } from 'react-bootstrap';
+import { Card, Nav, Button, Tabs, Tab, Alert } from 'react-bootstrap';
 import React, { useContext, useEffect, useState } from 'react';
 import { getImgById, getPetById } from '../Api/api';
 import NavBar from './navbar';
 import { MainContext } from '../Context/context';
 
 function PetProfile(props) {
+    const [admin] = useState(localStorage.getItem('admin'));
+    const [error, setError] = useState();
     const [thisPet, setThisPet] = useState({});
     const [imgPath, setImgPath] = useState();
     const { token, setToken, userId, savedPets, setSavedPets, petsSaved, setPetsSaved, saved, setSaved } = useContext(MainContext);
@@ -23,6 +25,10 @@ function PetProfile(props) {
     }, [petsSaved, savedPets, saved])
 
     const onSavePet = async () => {
+        if (admin == 'true' || token == 'noToken') {
+            setError('You must login as a User to Save Pets');
+            return;
+        }
         try {
             const response = await fetch(`http://localhost:5000/save_pet/user/${userId}/pet/${props.id}`, {
                 method: 'POST',
@@ -59,6 +65,7 @@ function PetProfile(props) {
 
     return (
         <>
+            {error && <Alert variant="danger" className='profile-error'>{error}</Alert>}
             <div>
                 {imgPath && <img src={`http://localhost:5000/${imgPath}`} className='profile-img' />}
                 <div className='pet-info'>
@@ -72,8 +79,8 @@ function PetProfile(props) {
                     <p>Hypoallergenic: {thisPet.hypoalergenic}</p>
                     <p>Dietary Restrictions: {thisPet.dietRestrictions}</p>
                     <img src="" alt="" />
-                    {!saved && <Button type="button" variant="warning" onClick={() => { onSavePet() }}>Save for Later</Button>}
-                    {saved && <Button type="button" variant="warning" onClick={() => { onUnSavePet() }}>Click here to remove from Save List</Button>}
+                    {!error && !saved && <Button type="button" variant="warning" onClick={() => { onSavePet() }}>Save for Later</Button>}
+                    {!error && saved && <Button type="button" variant="warning" onClick={() => { onUnSavePet() }}>Click here to remove from Save List</Button>}
                 </div>
             </div>
         </>
