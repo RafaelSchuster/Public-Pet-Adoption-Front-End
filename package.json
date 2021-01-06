@@ -7,8 +7,8 @@
     "public": "dist"
   },
   "engines": {
-    "node": ">=8.0.0 <13.0.0",
-    "npm": "2.5.x"
+    "node": "12.19.0",
+    "npm": "6.14.8"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
