@@ -6,6 +6,10 @@
   "hosting": {
     "public": "dist"
   },
+  "engines": {
+    "node": ">=8.0.0 <13.0.0",
+    "npm": "2.5.x"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
