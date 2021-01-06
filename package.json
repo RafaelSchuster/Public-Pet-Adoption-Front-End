@@ -2,9 +2,9 @@
   "name": "fullstackproject",
   "version": "0.1.0",
   "private": false,
-  "license": "UNLICENSED", 
+  "license": "UNLICENSED",
   "hosting": {
-    "public": "dist"    
+    "public": "dist"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -46,6 +46,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-    
   }
 }
