@@ -10,7 +10,7 @@ import {
 import Profile from './Components/profile';
 import NavBar from './Components/navbar';
 import MyPets from './Components/mypets';
-import Pets from './Components/pets';
+// import Pets from './Components/pets';
 import Search from './Components/search';
 import AdminForm from './Components/adminform';
 import AdminDashboard from './Components/admindash';
