@@ -10,7 +10,7 @@ import {
 import Profile from './Components/profile';
 import NavBar from './Components/navbar';
 import MyPets from './Components/mypets';
-import Pets from './Components/pets.jsx';
+// import Pets from './Components/pets.jsx';
 import Search from './Components/search';
 import AdminForm from './Components/adminform';
 import AdminDashboard from './Components/admindash';
@@ -113,10 +113,10 @@ function App() {
             <MyPets />
           </Route>
         </Switch>
-        <Switch>
+        {/* <Switch>
           <Route path="/pet_page/:id" component={Pets}>
           </Route>
-        </Switch>
+        </Switch> */}
         <Switch>
           <Route path="/search">
             <NavBar />
