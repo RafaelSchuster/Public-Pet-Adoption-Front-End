@@ -5,7 +5,6 @@ import logo2 from '../images/logo2.png';
 
 
 function NavBar() {
-
     const logout = () =>{
         localStorage.setItem('token', 'noToken');
         localStorage.setItem('admin', 'false');
@@ -17,7 +16,7 @@ function NavBar() {
                 <Nav.Link href="/" className="navLink">Home</Nav.Link>
                 <Nav.Link href='/search' className="navLink">Search</Nav.Link>
                 <Nav.Link href='/admin' className="navLink">Admin</Nav.Link>
-                <Button href='/logged_out' className="logout-btn" variant='warning' onClick={()=>logout()}>LogOut</Button>
+                <Button href='/logged_out' className="logout-btn" variant='warning' onClick={()=>logout()}>LogOut/In</Button>
                 <div className="banner-nav">
                     <img src={logo2} alt="" className="logo-nav" />
                     <span

@@ -59,7 +59,7 @@ function Profile(props) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic0BzIiwiaWF0IjoxNjA5Mjc2MzA1fQ.0WeE-JMB1CP9smIM1CIXD1-audVt6cze35lKrMrtEVo `
+                    'Authorization': `Bearer ${token} `
                 },
                 body: JSON.stringify({ post: newUserData }),
             })
@@ -95,8 +95,8 @@ function Profile(props) {
                         <Col>
                             <Form.Group controlId="formGroupEmail">
                                 <Form.Label></Form.Label>
-                                <Form.Control type="email" placeholder="Enter email"
-                                    onChange={e => changeEmail(e)} defaultValue={email} required />
+                                <Form.Control type="email" placeholder=" Your Email"
+                                    onChange={e => changeEmail(e)} defaultValue={email} disabled />
                             </Form.Group>
                         </Col>
                         <Col>

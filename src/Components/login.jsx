@@ -4,7 +4,6 @@ import Modal from 'react-modal';
 import { MainContext } from '../Context/context';
 import axios from 'axios'
 
-
 function Login() {
     const [modalLoginIsOpen, setModalLoginIsOpen] = useState(false);
     const [modalSignIsOpen, setModalSignIsOpen] = useState(false);

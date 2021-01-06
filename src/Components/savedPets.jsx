@@ -6,7 +6,6 @@ import { getPetById } from '../Api/api';
 function SavedPetsList() {
     const { savedPets, token,petsSaved, setPetsSaved,saved, setSaved } = useContext(MainContext);
     
-
     useEffect(() => {
         let petsSavedArr = [];
         if (savedPets) {

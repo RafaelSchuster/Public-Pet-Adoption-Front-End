@@ -10,9 +10,6 @@ import { getPetById } from '../Api/api'
 const arrPets = [];
 
 function MyPets() {
-    const [modalIsOpen1, setModalIsOpen1] = useState(false);
-    const [modalIsOpen2, setModalIsOpen2] = useState(false);
-    const [modalIsOpen3, setModalIsOpen3] = useState(false);
     const [petsToDisplay, setPetsToDisplay] = useState([]);
     const { pets, setPets, adopted, fostered, userPetStatus, userPets, currentUser, token } = useContext(MainContext);
 

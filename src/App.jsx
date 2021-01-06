@@ -49,7 +49,8 @@ function App() {
   const [admin, setAdmin] = useState();
 
   useEffect(() => {
-    getUserApi(token)
+    if(token !== 'noToken'){
+       getUserApi(token)
       .then(res => {
         setUserId(res.id);
         setFirstName(res.firstName);
@@ -70,6 +71,7 @@ function App() {
       .then(res => {
         setAllPets(res);
       })
+    }
   }, [token, refresher, saved])
 
 
