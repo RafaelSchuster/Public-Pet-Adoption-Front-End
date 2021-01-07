@@ -7,7 +7,6 @@ import { MainContext } from '../Context/context';
 import { useState } from 'react';
 import NavBar from './navbar';
 
-
 function Profile(props) {
     const [id] = useState(props.match.params.id);
     const [error, setError] = useState();
