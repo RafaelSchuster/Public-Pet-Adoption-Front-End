@@ -6,7 +6,7 @@ import PetStatus from './petstatus';
 import NavBar from './navbar';
 import SavedPetsList from './savedPets';
 
-function Pets(props) {
+function PetsPage(props) {
     const [id, setId] = useState(props.match.params.id);
     const [key, setKey] = useState('home');
 
@@ -35,4 +35,4 @@ function Pets(props) {
     )
 
 }
-export default Pets;
+export default PetsPage;
