@@ -1,6 +1,6 @@
 export const getUserApi = async (token) => {
   try {
-    const response = await fetch('http://localhost:5000/userlogin', {
+    const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/userlogin', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -12,7 +12,7 @@ export const getUserApi = async (token) => {
     console.log(body)
     return body;
   } catch (error) {
-    const response = await fetch('http://localhost:5000/adminlogin', {
+    const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/adminlogin', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ export const getUserApi = async (token) => {
 }
 export const getAdminApi = async (token) => {
   try {
-    const response = await fetch('http://localhost:5000/adminlogin', {
+    const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/adminlogin', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ export const getAdminApi = async (token) => {
 }
 
 export const getAllUsers = async (token) => {
-  const response = await fetch('http://localhost:5000/all_users', {
+  const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/all_users', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export const getAllUsers = async (token) => {
 }
 
 export const getAllPets = async (token) => {
-  const response = await fetch('http://localhost:5000/allpets', {
+  const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/allpets', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ export const getAllPets = async (token) => {
 }
 
 export const getUserById = async (token, id) => {
-  const response = await fetch(`http://localhost:5000/users/${id}`, {
+  const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/users/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ export const getUserById = async (token, id) => {
 }
 
 export const getPetById = async (token, id) => {
-  const response = await fetch(`http://localhost:5000/pets/${id}`, {
+  const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/pets/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ export const getPetById = async (token, id) => {
 
 export const getImgById = async (token, id) => {
   try {
-    const response = await fetch(`http://localhost:5000/images/${id}`, {
+    const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/images/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -114,14 +114,14 @@ export const getImgById = async (token, id) => {
 }
 
 export const searchPetByType = async (type) => {
-  const response = await fetch(`http://localhost:5000/search_type/${type}`);
+  const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/search_type/${type}`);
   const body = await response.json();
   if (response.status !== 200) throw Error(body.message);
   return body;
 }
 
 export const advancedSearchPet = async (status, height, weight, type, name) => {
-  const response = await fetch(`http://localhost:5000/adv_search?status=${status}&height=${height}&weight=${weight}&type=${type}&name=${name}`);
+  const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/adv_search?status=${status}&height=${height}&weight=${weight}&type=${type}&name=${name}`);
   try {
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);

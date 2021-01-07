@@ -68,7 +68,7 @@ function UserFullProfile(props) {
             bio: bio
         }
         try {
-            const response = await fetch('http://localhost:5000/user_admin_edit', {
+            const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/user_admin_edit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

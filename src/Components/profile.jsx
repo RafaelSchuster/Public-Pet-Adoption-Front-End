@@ -55,7 +55,7 @@ function Profile(props) {
             bio: bio
         }
         try {
-            const response = await fetch('http://localhost:5000/userprofile', {
+            const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/userprofile', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

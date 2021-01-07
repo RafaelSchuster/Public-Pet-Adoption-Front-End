@@ -65,7 +65,7 @@ function AdminLogin() {
                 password: password,
             }
             try {
-                const checkDupes = await fetch(`http://localhost:5000/checkdupes/admin/${email}`, {
+                const checkDupes = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/checkdupes/admin/${email}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ function AdminLogin() {
                 const bodyDupe = await checkDupes.json();
                 if (bodyDupe.length > 0) setError("There is an account with this email already")
                 else if (bodyDupe.length == 0) {
-                    const response = await fetch('http://localhost:5000/admin_sign', {
+                    const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/admin_sign', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ function AdminLogin() {
                     if (body.accessToken.length > 0) {
                         setToken(body.accessToken);
                         setAdministrator(true);
-                        window.location.href = 'http://localhost:3000/admindashboard';
+                        window.location.href = 'https://pet-project-itc.herokuapp.com//admindashboard';
                         setRefresher(true);
                     }
                     else {
@@ -107,7 +107,7 @@ function AdminLogin() {
             password: password,
         }
         try {
-            const response = await fetch('http://localhost:5000/adminlogin', {
+            const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/adminlogin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -119,7 +119,7 @@ function AdminLogin() {
             if (body.accessToken.length > 0) {
                 setToken(body.accessToken);
                 setAdministrator(true);
-                window.location.href = 'http://localhost:3000/admindashboard';
+                window.location.href = 'https://pet-project-itc.herokuapp.com//admindashboard';
                 setRefresher(true);
             }
             else {

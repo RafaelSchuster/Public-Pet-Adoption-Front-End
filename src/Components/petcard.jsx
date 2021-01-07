@@ -27,7 +27,7 @@ function PetCard(props) {
     }, [currentUser,refresher])
 
     const onChangingStatus = async (newStatus) => {
-        const response = await fetch(`http://localhost:5000/pet_status/${props.id}/update/${newStatus}`, {
+        const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/pet_status/${props.id}/update/${newStatus}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ function PetCard(props) {
     return (
         <>
             <Card className="my-card">
-                <Card.Img variant="top" src={`http://localhost:5000/${imgPath}`} alt='Pet Image' className='img-card' />
+                <Card.Img variant="top" src={`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/${imgPath}`} alt='Pet Image' className='img-card' />
                 <Card.Body>
                     <Card.Title>{props.name}</Card.Title>
                     <p>Pet Status : {thisPetStatus} </p>

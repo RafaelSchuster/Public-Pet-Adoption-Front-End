@@ -62,7 +62,7 @@ function Login() {
                 password: password,
             }
             try {
-                const checkDupes = await fetch(`http://localhost:5000/checkdupes/${email}`, {
+                const checkDupes = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/checkdupes/${email}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ function Login() {
                 const bodyDupe = await checkDupes.json();
                 if (bodyDupe.length > 0) setError("There is an account with this email already")
                 else if (bodyDupe.length == 0) {
-                    const response = await fetch('http://localhost:5000/user_sign', {
+                    const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/user_sign', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ function Login() {
                         setToken(body.accessToken);
                         setAdministrator(false);
                         setTimeout(()=>{
-                            window.location.href = 'http://localhost:3000';
+                            window.location.href = 'https://pet-project-itc.herokuapp.com/';
                         },2000)
                         setAdmin(false);
                     }
@@ -107,7 +107,7 @@ function Login() {
             password: password,
         }
         try {
-            const response = await fetch('http://localhost:5000/userlogin', {
+            const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/userlogin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -120,7 +120,7 @@ function Login() {
                 setToken(body.accessToken);
                 setAdministrator(false);
                 setTimeout(()=>{
-                    window.location.href = 'http://localhost:3000';
+                    window.location.href = 'https://pet-project-itc.herokuapp.com/';
                 },2000)
                 setAdmin(false);
             }

@@ -28,7 +28,7 @@ function PetStatus(props) {
             setError('You must login as a User to Adopt/Foster Pets');
             return;
         }
-        const response = await fetch(`http://localhost:5000/pet_status/${props.id}/update/${newStatus}`, {
+        const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/pet_status/${props.id}/update/${newStatus}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

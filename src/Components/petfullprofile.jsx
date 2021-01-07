@@ -85,7 +85,7 @@ function PetFullProfile(props) {
         e.target.files[0].id = id;
         data.append('file', e.target.files[0]);
         data.append('id', e.target.files[0].id);
-        axios.post(`http://localhost:5000/image_upload/${id}`, data, {
+        axios.post(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/image_upload/${id}`, data, {
             headers: headers
         });
     }
@@ -107,7 +107,7 @@ function PetFullProfile(props) {
             petBio: petBio
         }
         try {
-            const response = await fetch('http://localhost:5000/pet_admin_edit', {
+            const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/pet_admin_edit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

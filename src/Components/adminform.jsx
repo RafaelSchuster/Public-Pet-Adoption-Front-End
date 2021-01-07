@@ -62,14 +62,14 @@ function AdminForm() {
     };
 
     const imageHandler = (e) => {
-        axios.get(`http://localhost:5000/pet_id/${petName}/type/${type}`, {
+        axios.get(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/pet_id/${petName}/type/${type}`, {
             headers: headers
         })
             .then(res => {
                 const data = new FormData();
                 data.append('file', e.target.files[0]);
                 data.append('id', parseInt(res.data));
-                axios.post(`http://localhost:5000/image_upload/${res.data}`, data, {
+                axios.post(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/image_upload/${res.data}`, data, {
                     headers: headers
                 });
             })
@@ -91,7 +91,7 @@ function AdminForm() {
             petBio: petBio
         }
         try {
-            const response = await fetch('http://localhost:5000/pet_profile', {
+            const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/pet_profile', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -30,7 +30,7 @@ function PetProfile(props) {
             return;
         }
         try {
-            const response = await fetch(`http://localhost:5000/save_pet/user/${userId}/pet/${props.id}`, {
+            const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/${userId}/pet/${props.id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ function PetProfile(props) {
 
     const onUnSavePet = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/save_pet/user/${userId}/pet/${props.id}`, {
+            const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/save_pet/user/${userId}/pet/${props.id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ function PetProfile(props) {
         <>
             {error && <Alert variant="danger" className='profile-error'>{error}</Alert>}
             <div>
-                {imgPath && <img src={`http://localhost:5000/${imgPath}`} className='profile-img' />}
+                {imgPath && <img src={`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/${imgPath}`} className='profile-img' />}
                 <div className='pet-info'>
                     <p>Name: {thisPet.name} </p>
                     <p>Type: {thisPet.type}</p>

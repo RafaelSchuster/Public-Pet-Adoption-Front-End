@@ -49,7 +49,7 @@ function App() {
   const [admin, setAdmin] = useState();
 
   useEffect(() => {
-    if (token != 'noToken') {
+    if (token && token != 'noToken') {
       getUserApi(token)
         .then(res => {
           setUserId(res.id);
