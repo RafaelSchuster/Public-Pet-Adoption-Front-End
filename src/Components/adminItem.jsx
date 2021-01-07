@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-function UserItem(props) {
+function AdminItem(props) {
     return (
         <div
             className='user-item'>
@@ -20,9 +20,9 @@ function UserItem(props) {
                 {`Email : 
                 ${props.email}`}
             </span>
-            <a href={`/users/${props.id}`} className="btn btn-success user-link" >View User's Full Profile</a>
+            <a href={`/admins/${props.id}`} className="btn btn-success user-link" >View Admin's Full Profile</a>
         </div>
     )
 }
 
-export default UserItem;
+export default AdminItem;

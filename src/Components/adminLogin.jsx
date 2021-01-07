@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Card, Form, Alert, Button, Col } from 'react-bootstrap';
 import Modal from 'react-modal';
 import { MainContext } from '../Context/context';
-import axios from 'axios'
+import axios from 'axios';
 
 
 function AdminLogin() {
@@ -20,17 +20,14 @@ function AdminLogin() {
 
     const useLocalState = (localItem) => {
         const [localToken, setState] = useState(localStorage.getItem(localItem));
-
         const setLocalToken = (newItem) => {
             localStorage.setItem(localItem, newItem);
             setState(newItem);
         }
-
         return [localToken, setLocalToken];
     }
     const [token, setToken] = useLocalState('token');
     const [administrator, setAdministrator] = useLocalState('admin');
-
 
     const changeFs = (e) => {
         setFirstName(e.target.value);
@@ -70,9 +67,9 @@ function AdminLogin() {
                     headers: {
                         'Content-Type': 'application/json',
                     }
-                })
+                });
                 const bodyDupe = await checkDupes.json();
-                if (bodyDupe.length > 0) setError("There is an account with this email already")
+                if (bodyDupe.length > 0) setError("There is an account with this email already");
                 else if (bodyDupe.length == 0) {
                     const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/admin_sign', {
                         method: 'POST',
@@ -80,7 +77,7 @@ function AdminLogin() {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({ post: newAdminData }),
-                    })
+                    });
                     body = await response.json();
                     if (body.accessToken.length > 0) {
                         setToken(body.accessToken);
@@ -101,11 +98,11 @@ function AdminLogin() {
     const submitLogin = async (e) => {
         e.preventDefault();
         let body;
-        setError2('')
+        setError2('');
         const loginUserData = {
             email: email,
             password: password,
-        }
+        };
         try {
             const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/adminlogin', {
                 method: 'POST',
@@ -113,9 +110,8 @@ function AdminLogin() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ post: loginUserData }),
-            })
+            });
             body = await response.json();
-
             if (body.accessToken.length > 0) {
                 setToken(body.accessToken);
                 setAdministrator(true);
@@ -125,7 +121,6 @@ function AdminLogin() {
             else {
                 setError2(body);
             }
-
         } catch (error) {
             setError2(body);
         }

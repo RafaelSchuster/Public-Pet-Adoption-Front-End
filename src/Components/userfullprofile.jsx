@@ -30,6 +30,7 @@ function UserFullProfile(props) {
                 setThisUser(res);
             })
             .catch(err => console.log(err));
+
     }, [])
 
     const changeFs = (e) => {
@@ -56,6 +57,10 @@ function UserFullProfile(props) {
     }
 
     const submitprofile = async (e) => {
+        let arrUserPets = [];
+        for (let i = 0; i < userPets.length; i++) {
+            arrUserPets.push(userPets[i]);
+        }
         e.preventDefault();
         let body;
         const newUserData = {
@@ -64,18 +69,18 @@ function UserFullProfile(props) {
             lastName: lastName,
             telephone: telephone,
             email: email,
-            petsOwned: userPets,
+            petsOwned: arrUserPets,
             bio: bio
         }
         try {
-            const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/user_admin_edit', {
+            const response = await fetch('http://localhost:5001/user_admin_edit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({ post: newUserData }),
-            })
+            });
             body = await response.json();
             setError(body);
         } catch (error) {
@@ -117,7 +122,7 @@ function UserFullProfile(props) {
                             <Form.Group controlId="formGroupEmail">
                                 <Form.Label></Form.Label>
                                 <Form.Control type="email" placeholder="Enter email"
-                                    onChange={e => changeEmail(e)} defaultValue={thisUser.email} required />
+                                    onChange={e => changeEmail(e)} defaultValue={thisUser.email} disabled />
                             </Form.Group>
                         </Col>
                         <Col>

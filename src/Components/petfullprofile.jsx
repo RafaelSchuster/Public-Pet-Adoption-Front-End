@@ -105,21 +105,21 @@ function PetFullProfile(props) {
             hypoalergenic: hypoalergenic,
             dietRestrictions: dietRestrictions,
             petBio: petBio
-        }
+        };
         try {
-            const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/pet_admin_edit', {
+            const response = await fetch('http://localhost:5001/pet_admin_edit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({ post: newPetData }),
-            })
+            });
             body = await response.json();
             setError(body);
         } catch (error) {
             setError(body);
-        }
+        };
     }
 
     return (
@@ -136,7 +136,6 @@ function PetFullProfile(props) {
                     Click Here To Admin's Dashboard
             </a>
                 <Container className="container-profile admin-prof">
-                    {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={e => petSubmitting(e)} encType="multipart/form-data">
                         <Form.Row>
                             <Col>
@@ -206,9 +205,10 @@ function PetFullProfile(props) {
                             <Form.Control as="textarea" rows={3} placeholder="Pet's Bio"
                                 onChange={e => addPetBio(e)} defaultValue={thisPet.petBio} />
                         </Form.Group>
-                        <Button className="w-100 mt-2" variant="warning" type="submit">
+                        <Button className="w-100 mt-1" variant="warning" type="submit">
                             Submit
                     </Button>
+                        {error && <Alert variant="danger" className="text-center admin-form-alert">{error}</Alert>}
                     </Form>
                 </Container>
             </div>

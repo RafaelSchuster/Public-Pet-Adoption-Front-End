@@ -9,7 +9,6 @@ export const getUserApi = async (token) => {
     })
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
-    console.log(body)
     return body;
   } catch (error) {
     const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/adminlogin', {
@@ -20,7 +19,6 @@ export const getUserApi = async (token) => {
       }
     })
     const body = await response.json();
-    console.log(body)
     if (response.status !== 200) throw Error(body.message);
     return body;
   }
@@ -36,12 +34,24 @@ export const getAdminApi = async (token) => {
       }
     })
     const body = await response.json();
-    console.log(body)
     if (response.status !== 200) throw Error(body.message);
     return body;
   } catch (error) {
     return false;
   }
+}
+
+export const getAllAdmins = async (token) => {
+  const response = await fetch('http://localhost:5001/alladmins', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token} `
+    }
+  })
+  const body = await response.json();
+  if (response.status !== 200) throw Error(body.message);
+  return body;
 }
 
 export const getAllUsers = async (token) => {
@@ -71,7 +81,20 @@ export const getAllPets = async (token) => {
 }
 
 export const getUserById = async (token, id) => {
-  const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/users/${id}`, {
+  const response = await fetch(`http://localhost:5001/users/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token} `
+    }
+  })
+  const body = await response.json();
+  if (response.status !== 200) throw Error(body.message);
+  return body;
+}
+
+export const getAdminById = async (token, id) => {
+  const response = await fetch(`http://localhost:5001/admins/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

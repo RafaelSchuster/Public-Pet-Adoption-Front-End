@@ -132,7 +132,8 @@
      border-radius: 10px;
      z-index: 3;
  }
- .logout-btn{
+
+ .logout-btn {
      color: rgb(148, 25, 148) !important;
      font-size: 20px !important;
  }
@@ -152,8 +153,14 @@
      background-color: chocolate;
      height: 50%;
      border-radius: 10px;
-     padding-top: 70px;
+     padding-top: 30px;
      opacity: 92%;
+ }
+
+ .admin-form-alert {
+     margin-top: 7px;
+     position: absolute;
+     height: 53px !important;
  }
 
  .header-profile {
@@ -320,12 +327,13 @@
      top: 2%;
      border-radius: 20px;
  }
- .profile-error{
+
+ .profile-error {
      position: absolute;
      text-align: center;
      top: -2%;
-    width: 40%;     
-    left: 30%;
+     width: 40%;
+     left: 30%;
  }
 
  /* Admin */

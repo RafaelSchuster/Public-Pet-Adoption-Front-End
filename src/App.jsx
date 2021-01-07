@@ -17,15 +17,16 @@ import AdminDashboard from './Components/admindash';
 import { MainContext } from './Context/context';
 import Login from './Components/login';
 import Edit from './Components/edit';
-import { getUserApi, getAllUsers, getAllPets, getAdminApi } from '../src/Api/api.js';
+import { getUserApi, getAllUsers, getAllPets, getAdminApi, getAllAdmins } from '../src/Api/api.js';
 import UserFullProfile from './Components/userfullprofile';
 import PetFullProfile from './Components/petfullprofile';
 import BasicSearchResults from './Components/basicSearchResults';
 import AdminLogin from './Components/adminLogin';
 import { ProtectedRoute } from './Components/protectedRoute';
+import AdminFullProfile from './Components/adminfullprofile';
 
 function App() {
-  const [userId, setUserId] = useState()
+  const [userId, setUserId] = useState();
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState();
   const [firstName, setFirstName] = useState();
@@ -47,6 +48,7 @@ function App() {
   const [petsSaved, setPetsSaved] = useState([]);
   const [saved, setSaved] = useState();
   const [admin, setAdmin] = useState();
+  const [admins, setAdmins] = useState();
 
   useEffect(() => {
     getUserApi(token)
@@ -65,6 +67,10 @@ function App() {
     getAllUsers(token)
       .then(res => {
         setUsers(res);
+      })
+    getAllAdmins(token)
+      .then(res => {
+        setAdmins(res);
       })
     getAllPets(token)
       .then(res => {
@@ -92,7 +98,8 @@ function App() {
       setRefresher, savedPets, setSavedPets,
       petsSaved, setPetsSaved,
       saved, setSaved,
-      admin
+      admin,
+      admins, setAdmins
     }}>
       <Router>
         <Switch>
@@ -150,6 +157,10 @@ function App() {
         </Switch>
         <Switch>
           <Route path="/users/:id" component={UserFullProfile}>
+          </Route>
+        </Switch>
+        <Switch>
+          <Route path="/admins/:id" component={AdminFullProfile}>
           </Route>
         </Switch>
         <Switch>

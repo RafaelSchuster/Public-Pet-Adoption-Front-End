@@ -66,14 +66,17 @@ function AdminForm() {
             headers: headers
         })
             .then(res => {
+                console.log(res.data.id)
                 const data = new FormData();
                 data.append('file', e.target.files[0]);
                 data.append('id', parseInt(res.data));
-                axios.post(`http://localhost:5001/image_upload/${res.data}`, data, {
+                axios.post(`http://localhost:5001/image_upload/${res.data.id}`, data, {
                     headers: headers
+                }).then(res => {
+                    setError(res.data);
                 });
-            })
-    }
+            });
+    };
 
     const petSubmitting = async (e) => {
         e.preventDefault();
@@ -89,22 +92,22 @@ function AdminForm() {
             hypoalergenic: hypoalergenic,
             dietRestrictions: dietRestrictions,
             petBio: petBio
-        }
+        };
         try {
-            const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/pet_profile', {
+            const response = await fetch('http://localhost:5001/pet_profile', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({ post: newPetData }),
-            })
+            });
             body = await response.json();
             setError(body);
             setImgActive(true);
         } catch (error) {
             setError(body);
-        }
+        };
     }
 
     return (
@@ -121,7 +124,6 @@ function AdminForm() {
                     Click Here To Admin's Dashboard
             </a>
                 <Container className="container-profile admin-prof">
-                    {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={e => petSubmitting(e)}>
                         <Form.Row>
                             <Col>
@@ -185,10 +187,11 @@ function AdminForm() {
                             <Form.Label></Form.Label>
                             <Form.Control as="textarea" rows={3} placeholder="Pet's Bio" onChange={e => addPetBio(e)} />
                         </Form.Group>
-                        <Button className="w-100 mt-2" variant="warning" type="submit">
+                        <Button className="w-100 mb-1" variant="warning" type="submit">
                             Submit
                     </Button>
                     </Form>
+                    {error && <Alert variant="danger" className="text-center">{error}</Alert>}
                 </Container>
             </div>
         </>
