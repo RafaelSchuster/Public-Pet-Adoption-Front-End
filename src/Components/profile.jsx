@@ -56,7 +56,7 @@ function Profile(props) {
         };
         if (admin === 'false') {
             try {
-                const response = await fetch('http://localhost:5001/userprofile', {
+                const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/userprofile', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ function Profile(props) {
         }
         else {
             try {
-                const response = await fetch('http://localhost:5001/adminprofile', {
+                const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/adminprofile', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

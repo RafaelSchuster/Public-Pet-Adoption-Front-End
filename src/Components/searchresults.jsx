@@ -15,8 +15,7 @@ function SearchResults() {
                         name={pet.name}
                         type={pet.type}
                     />
-                )}
-                
+                )}    
             </ul>
         </>
     )

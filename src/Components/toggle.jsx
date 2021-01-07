@@ -9,12 +9,10 @@ const AccordionContext = React.createContext({});
 
 function ContextAwareToggle({ children, eventKey, callback }) {
     const currentEventKey = useContext(AccordionContext);
-
     const decoratedOnClick = useAccordionToggle(
         eventKey,
         () => callback && callback(eventKey),
     );
-
     const isCurrentEventKey = currentEventKey === eventKey;
 
     return (

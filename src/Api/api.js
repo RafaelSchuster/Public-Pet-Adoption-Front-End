@@ -42,7 +42,7 @@ export const getAdminApi = async (token) => {
 }
 
 export const getAllAdmins = async (token) => {
-  const response = await fetch('http://localhost:5001/alladmins', {
+  const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/alladmins', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ export const getAllPets = async (token) => {
 }
 
 export const getUserById = async (token, id) => {
-  const response = await fetch(`http://localhost:5001/users/${id}`, {
+  const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/users/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ export const getUserById = async (token, id) => {
 }
 
 export const getAdminById = async (token, id) => {
-  const response = await fetch(`http://localhost:5001/admins/${id}`, {
+  const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/admins/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ export const getPetById = async (token, id) => {
 
 export const getImgById = async (token, id) => {
   try {
-    const response = await fetch(`http://localhost:5001/images/${id}`, {
+    const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/images/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

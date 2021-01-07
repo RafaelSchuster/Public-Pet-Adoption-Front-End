@@ -62,7 +62,7 @@ function AdminForm() {
     };
 
     const imageHandler = (e) => {
-        axios.get(`http://localhost:5001/pet_id/${petName}/type/${type}`, {
+        axios.get(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/pet_id/${petName}/type/${type}`, {
             headers: headers
         })
             .then(res => {
@@ -70,7 +70,7 @@ function AdminForm() {
                 const data = new FormData();
                 data.append('file', e.target.files[0]);
                 data.append('id', parseInt(res.data));
-                axios.post(`http://localhost:5001/image_upload/${res.data.id}`, data, {
+                axios.post(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/image_upload/${res.data.id}`, data, {
                     headers: headers
                 }).then(res => {
                     setError(res.data);
@@ -94,7 +94,7 @@ function AdminForm() {
             petBio: petBio
         };
         try {
-            const response = await fetch('http://localhost:5001/pet_profile', {
+            const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/pet_profile', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
