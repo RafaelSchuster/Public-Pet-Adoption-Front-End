@@ -62,14 +62,14 @@ function AdminForm() {
     };
 
     const imageHandler = (e) => {
-        axios.get(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/pet_id/${petName}/type/${type}`, {
+        axios.get(`http://localhost:5001/pet_id/${petName}/type/${type}`, {
             headers: headers
         })
             .then(res => {
                 const data = new FormData();
                 data.append('file', e.target.files[0]);
                 data.append('id', parseInt(res.data));
-                axios.post(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/image_upload/${res.data}`, data, {
+                axios.post(`http://localhost:5001/image_upload/${res.data}`, data, {
                     headers: headers
                 });
             })

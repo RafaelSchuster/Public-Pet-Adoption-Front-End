@@ -20,7 +20,7 @@ function PetCard(props) {
     useEffect(() => {
         getImgById(token, props.id)
             .then(res => {
-                if (res) setImgPath(res.FileName);
+                if (res) setImgPath(res);
             })
         if (props.petStatus == 'adopted') setAdopted(true)
         else if (props.petStatus == 'fostered') setFostered(true);
@@ -58,7 +58,7 @@ function PetCard(props) {
     return (
         <>
             <Card className="my-card">
-                <Card.Img variant="top" src={`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/${imgPath}`} alt='Pet Image' className='img-card' />
+                <Card.Img variant="top" src={`${imgPath}`} alt='Pet Image' className='img-card' />
                 <Card.Body>
                     <Card.Title>{props.name}</Card.Title>
                     <p>Pet Status : {thisPetStatus} </p>

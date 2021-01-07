@@ -49,29 +49,27 @@ function App() {
   const [admin, setAdmin] = useState();
 
   useEffect(() => {
-    if (token && token != 'noToken') {
-      getUserApi(token)
-        .then(res => {
-          setUserId(res.id);
-          setFirstName(res.firstName);
-          setLastName(res.lastName);
-          setTelephone(res.telephone);
-          setEmail(res.email);
-          setBio(res.bio);
-          setUserPets(res.petsOwned);
-          setSavedPets(res.petsSaved);
-          setAdmin(res.admin);
-        })
-        .catch(err => console.log(err));
-      getAllUsers(token)
-        .then(res => {
-          setUsers(res);
-        })
-      getAllPets(token)
-        .then(res => {
-          setAllPets(res);
-        })
-    }
+    getUserApi(token)
+      .then(res => {
+        setUserId(res.id);
+        setFirstName(res.firstName);
+        setLastName(res.lastName);
+        setTelephone(res.telephone);
+        setEmail(res.email);
+        setBio(res.bio);
+        setUserPets(res.petsOwned);
+        setSavedPets(res.petsSaved);
+        setAdmin(res.admin);
+      })
+      .catch(err => console.log(err));
+    getAllUsers(token)
+      .then(res => {
+        setUsers(res);
+      })
+    getAllPets(token)
+      .then(res => {
+        setAllPets(res);
+      })
   }, [token, refresher, saved])
 
 

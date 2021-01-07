@@ -20,7 +20,7 @@ function PetProfile(props) {
 
         getImgById(token, props.id)
             .then(res => {
-                if (res) setImgPath(res.FileName);
+                if (res) setImgPath(res);
             })
     }, [petsSaved, savedPets, saved])
 
@@ -67,7 +67,7 @@ function PetProfile(props) {
         <>
             {error && <Alert variant="danger" className='profile-error'>{error}</Alert>}
             <div>
-                {imgPath && <img src={`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/${imgPath}`} className='profile-img' />}
+                {imgPath && <img src={`${imgPath}`} className='profile-img' />}
                 <div className='pet-info'>
                     <p>Name: {thisPet.name} </p>
                     <p>Type: {thisPet.type}</p>

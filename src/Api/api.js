@@ -98,14 +98,14 @@ export const getPetById = async (token, id) => {
 
 export const getImgById = async (token, id) => {
   try {
-    const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/images/${id}`, {
+    const response = await fetch(`http://localhost:5001/images/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token} `
       }
     });
-    const body = await response.json();
+    const body = await response.text();
     if (response.status !== 200) throw Error(body.message);
     return body;
   } catch (error) {
