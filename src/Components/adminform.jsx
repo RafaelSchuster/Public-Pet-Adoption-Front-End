@@ -62,7 +62,6 @@ function AdminForm() {
     };
 
     const imageHandler = (e) => {
-        console.log('form')
         axios.get(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/pet_id/${petName}/type/${type}`, {
             headers: headers
         })
