@@ -49,9 +49,14 @@ export const getAllAdmins = async (token) => {
       'Authorization': `Bearer ${token} `
     }
   })
-  const body = await response.json();
-  if (response.status !== 200) throw Error(body.message);
-  return body;
+  try {
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  } catch (error) {
+    console.log(error);
+  }
+
 }
 
 export const getAllUsers = async (token) => {
@@ -62,9 +67,14 @@ export const getAllUsers = async (token) => {
       'Authorization': `Bearer ${token} `
     }
   })
-  const body = await response.json();
-  if (response.status !== 200) throw Error(body.message);
-  return body;
+  try {
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  } catch (error) {
+    console.log(error);
+  }
+
 }
 
 export const getAllPets = async (token) => {
@@ -75,9 +85,15 @@ export const getAllPets = async (token) => {
       'Authorization': `Bearer ${token} `
     }
   })
-  const body = await response.json();
-  if (response.status !== 200) throw Error(body.message);
-  return body;
+  try {
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  } catch (error) {
+    console.log(error);
+
+  }
+
 }
 
 export const getUserById = async (token, id) => {
@@ -88,9 +104,13 @@ export const getUserById = async (token, id) => {
       'Authorization': `Bearer ${token} `
     }
   })
-  const body = await response.json();
-  if (response.status !== 200) throw Error(body.message);
-  return body;
+  try {
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export const getAdminById = async (token, id) => {
@@ -101,9 +121,13 @@ export const getAdminById = async (token, id) => {
       'Authorization': `Bearer ${token} `
     }
   })
-  const body = await response.json();
-  if (response.status !== 200) throw Error(body.message);
-  return body;
+  try {
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export const getPetById = async (token, id) => {
@@ -114,9 +138,14 @@ export const getPetById = async (token, id) => {
       'Authorization': `Bearer ${token} `
     }
   });
-  const body = await response.json();
-  if (response.status !== 200) throw Error(body.message);
-  return body;
+  try {
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  } catch (error) {
+    console.log(error);
+  }
+
 }
 
 export const getImgById = async (token, id) => {
@@ -138,9 +167,13 @@ export const getImgById = async (token, id) => {
 
 export const searchPetByType = async (type) => {
   const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/search_type/${type}`);
-  const body = await response.json();
-  if (response.status !== 200) throw Error(body.message);
-  return body;
+  try {
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export const advancedSearchPet = async (status, height, weight, type, name) => {

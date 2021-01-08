@@ -24,6 +24,7 @@ import BasicSearchResults from './Components/basicSearchResults';
 import AdminLogin from './Components/adminLogin';
 import { ProtectedRoute } from './Components/protectedRoute';
 import AdminFullProfile from './Components/adminfullprofile';
+import { ProtectedRouteProfile } from './Components/protectedRouteProfile';
 
 function App() {
   const [userId, setUserId] = useState();
@@ -98,7 +99,7 @@ function App() {
       setRefresher, savedPets, setSavedPets,
       petsSaved, setPetsSaved,
       saved, setSaved,
-      admin,
+      admin, setAdmin,
       admins, setAdmins
     }}>
       <Router>
@@ -110,7 +111,7 @@ function App() {
           </Route>
         </Switch>
         <Switch>
-          <Route path='/profile/:id' component={Profile} />
+          <ProtectedRouteProfile path='/profile/:id' component={Profile} />
         </Switch>
         <Switch>
           <Route path="/mypets">
@@ -156,15 +157,13 @@ function App() {
           </Route>
         </Switch>
         <Switch>
-          <Route path="/users/:id" component={UserFullProfile}>
-          </Route>
+          <ProtectedRoute path="/users/:id" component={UserFullProfile} />
         </Switch>
         <Switch>
-          <Route path="/admins/:id" component={AdminFullProfile}>
-          </Route>
+          <ProtectedRoute path="/admins/:id" component={AdminFullProfile} />
         </Switch>
         <Switch>
-          <Route exact path="/pet_profile/:id" component={PetFullProfile} />
+          <ProtectedRoute exact path="/pet_profile/:id" component={PetFullProfile} />
         </Switch>
       </Router>
     </MainContext.Provider>

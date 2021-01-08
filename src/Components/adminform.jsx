@@ -27,10 +27,10 @@ function AdminForm() {
         setPetName(e.target.value);
     }
     const addPetType = (e) => {
-        setType(e.target.value);
+        setType(e.target.value.toLowerCase());
     }
     const addPetColor = (e) => {
-        setColor(e.target.value);
+        setColor(e.target.value.toLowerCase());
     }
     const addPetHeight = (e) => {
         setHeight(e.target.value);
@@ -39,7 +39,7 @@ function AdminForm() {
         setWeight(e.target.value);
     }
     const addPetBreed = (e) => {
-        setBreed(e.target.value);
+        setBreed(e.target.value.toLowerCase());
     }
     const addDiet = (e) => {
         setDietRestrictions(e.target.value);
@@ -62,6 +62,7 @@ function AdminForm() {
     };
 
     const imageHandler = (e) => {
+        console.log('form')
         axios.get(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/pet_id/${petName}/type/${type}`, {
             headers: headers
         })

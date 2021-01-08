@@ -10,6 +10,14 @@ function AdminsList() {
     return (
         <>
             <ul>
+                <a
+                    href="/admin"
+                    className="btn btn-warning w-100 admin-form-link"
+                    variant="warning"
+                    type="submit"
+                >
+                    Click Here To Pet's Upload Form
+            </a>
                 {admins && admins.map(admin =>
                     <AdminItem
                         key={Math.random()}

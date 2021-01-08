@@ -13,6 +13,13 @@ function Main() {
 
     const handleTypeInput = (e) => {
         setTypeSearch(e.target.value);
+        if (e.target.value.trim() == '') setTypeSearch('undefined')
+    }
+
+    const handleTypeKeyInput = (e) => {
+        if (e.key === 'Enter') {
+            javascript: window.location.href = `/basic_search_results/${typeSearch}`;
+        }
     }
 
     const basicSearching = (e) => {
@@ -34,6 +41,7 @@ function Main() {
                         rows={1}
                         placeholder='Search Pets By Type...'
                         onChange={e => handleTypeInput(e)}
+                        onKeyUp={e => handleTypeKeyInput(e)}
                     >
                     </FormControl>
                     <Button className="btn btn-warning w-100" type="submit">Basic Search</Button>
@@ -44,13 +52,14 @@ function Main() {
                     <Card.Body>
                         <Card.Title>Welcome to RentaPET</Card.Title>
                         <Card.Text className="mb-3">
-                            Your Pet's Page!
+                            Pet's Page!
                     </Card.Text>
                         <Card.Link href="/mypets" className="w-100 btn btn-warning" variant="success">My Pets Page</Card.Link>
-                        <Card.Text className="mt-5 mb-3">
-                            Your Profile! We've got your back!
+                        <Card.Text className="mt-3 mb-3">
+                            Go to Profile! We've got your back!
                     </Card.Text>
-                        <Card.Link href={`/profile/${userId}`} className="w-100 btn btn-warning" variant="warning">Go to My Profile</Card.Link>
+                        <Card.Link href={`/profile/${userId}`} className="w-100 btn btn-warning mb-2" variant="warning">Go to My Profile</Card.Link>
+                        <Card.Link href={`/admin`} className="w-100 btn btn-dark admin-main-btn" variant="info">Admin? Click Here To Admin's Section</Card.Link>
                     </Card.Body>
                 </Card>
             </div>

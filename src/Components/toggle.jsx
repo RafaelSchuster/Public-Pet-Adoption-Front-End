@@ -67,6 +67,13 @@ function Toggle() {
 
     const handleTypeInput = (e) => {
         setTypeSearch(e.target.value);
+        if (e.target.value.trim() == '') setTypeSearch('undefined')
+    }
+
+    const handleTypeKeyInput = (e) => {
+        if (e.key === 'Enter') {
+            javascript: window.location.href = `/basic_search_results/${typeSearch}`;
+        }
     }
 
     const basicSearching = (e) => {
@@ -88,8 +95,9 @@ function Toggle() {
                                     as="textarea"
                                     className="form-control search-basic  "
                                     id='basic'
-                                    rows={2}
+                                    rows={1}
                                     onChange={e => handleTypeInput(e)}
+                                    onKeyUp={e => handleTypeKeyInput(e)}
                                     placeholder='Search Pets By Type...' >
                                 </FormControl>
                                 <Button className="btn btn-success w-100 basic-btn" variant='success' type="submit"  >Basic Search By Type</Button>

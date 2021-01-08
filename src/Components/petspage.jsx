@@ -23,9 +23,6 @@ function PetsPage(props) {
                 <Tab eventKey="home" title="Pet Profile" className="tab-item" >
                     <PetProfile id={id} />
                 </Tab>
-                <Tab eventKey="profile" title="Pet Status" className="tab-item pet-status">
-                    <PetStatus id={id} />
-                </Tab>
                 <Tab eventKey="saved" title="Saved Pets" className="tab-item">
                     <SavedPetsList/>
                 </Tab>

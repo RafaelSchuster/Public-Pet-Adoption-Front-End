@@ -20,6 +20,12 @@
      width: 40rem;
  }
 
+ .admin-main-btn {
+     position: absolute;
+     left: -20px !important;
+     top: 90%;
+ }
+
  .main-card {
      margin-top: 30px;
      opacity: 92%;
@@ -120,6 +126,7 @@
  }
 
  .banner-nav {
+     color: rgb(87, 43, 14);
      position: absolute;
      right: 50px;
  }
@@ -301,7 +308,7 @@
      height: 400%;
      color: white;
      left: 0%;
-     padding: 150px;
+     padding-top: 150px;
  }
 
  .pet-page {
@@ -364,9 +371,9 @@
 
  .pet-item {
      position: relative;
-     width: 80%;
+     width: 100%;
      height: 100px;
-     left: 10%;
+     left: 0%;
      top: 100px !important;
      border-radius: 6px;
      background-color: chocolate;
@@ -423,7 +430,7 @@
  .pet-list-admin {
      position: absolute;
      width: 100%;
-     top: -60px;
+     top: -40px;
      left: -30px;
  }
 
@@ -437,9 +444,9 @@
 
  .user-item {
      position: relative;
-     width: 80%;
+     width: 98%;
      height: 100px;
-     left: 10%;
+     left: 0%;
      top: -80px !important;
      border-radius: 6px;
      background-color: chocolate;
@@ -542,4 +549,17 @@
      color: white;
      margin-bottom: 15px;
      opacity: 92%;
+ }
+
+ .admin-form-link {
+     position: absolute;
+     top: 0;
+     left: 0;
+     top: 20px;
+ }
+
+ .admin-form-pet {
+     position: absolute;
+     top: 50px;
+     left: 30px;
  }

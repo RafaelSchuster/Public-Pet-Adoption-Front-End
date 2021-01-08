@@ -2,6 +2,7 @@ import React from 'react';
 import '../App.css';
 
 function PetItem(props) {
+    const admin = localStorage.getItem('admin')
     return (
         <div
             className='pet-item'>
@@ -18,9 +19,8 @@ function PetItem(props) {
                 className='pet-breed'>
                 {`Breed : ${props.breed}`}
             </span>
-
-            <a href={`/pet_profile/${props.id}`} className="btn btn-success profile-link">Edit Profile</a>
-            <a href={`/pet_page/${props.id}`} className="btn btn-success">View Profile</a>
+           {admin === 'true' && <a href={`/pet_profile/${props.id}`} className="btn btn-success">Admin Edit Pet Profile</a>}
+            <a href={`/pet_page/${props.id}`} className="btn btn-success profile-link">View Pet's Profile</a>
         </div>
     )
 }

@@ -82,7 +82,7 @@ function AdminLogin() {
                     if (body.accessToken.length > 0) {
                         setToken(body.accessToken);
                         setAdministrator(true);
-                        window.location.href = 'https://pet-project-itc.herokuapp.com/admindashboard';
+                        window.location.href = 'https://pet-project-itc.herokuapp.com/admin';
                         setRefresher(true);
                     }
                     else {
@@ -115,7 +115,7 @@ function AdminLogin() {
             if (body.accessToken.length > 0) {
                 setToken(body.accessToken);
                 setAdministrator(true);
-                window.location.href = 'https://pet-project-itc.herokuapp.com/admindashboard';
+                window.location.href = 'https://pet-project-itc.herokuapp.com/admin';
                 setRefresher(true);
             }
             else {

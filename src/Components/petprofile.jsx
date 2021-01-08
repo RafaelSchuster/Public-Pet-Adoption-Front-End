@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { getImgById, getPetById } from '../Api/api';
 import NavBar from './navbar';
 import { MainContext } from '../Context/context';
+import PetStatus from './petstatus';
 
 function PetProfile(props) {
     const [admin] = useState(localStorage.getItem('admin'));
@@ -81,6 +82,7 @@ function PetProfile(props) {
                     <img src="" alt="" />
                     {!error && !saved && <Button type="button" variant="warning" onClick={() => { onSavePet() }}>Save for Later</Button>}
                     {!error && saved && <Button type="button" variant="warning" onClick={() => { onUnSavePet() }}>Click here to remove from Save List</Button>}
+                    <PetStatus id={props.id}/>
                 </div>
             </div>
         </>

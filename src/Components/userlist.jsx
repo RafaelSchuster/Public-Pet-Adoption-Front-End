@@ -9,6 +9,14 @@ function UsersList() {
     return (
         <>
             <ul>
+                <a
+                    href="/admin"
+                    className="btn btn-warning w-100 admin-form-link"
+                    variant="warning"
+                    type="submit"
+                >
+                    Click Here To Pet's Upload Form
+            </a>
                 {users && users.map(user =>
                     <UserItem
                         key={Math.random()}

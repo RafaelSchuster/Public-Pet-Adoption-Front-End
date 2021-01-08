@@ -83,9 +83,9 @@ function Login() {
                     if (body.accessToken.length > 0) {
                         setToken(body.accessToken);
                         setAdministrator(false);
-                        setTimeout(()=>{
+                        setTimeout(() => {
                             window.location.href = 'https://pet-project-itc.herokuapp.com/';
-                        },2000)
+                        }, 2000)
                         setAdmin(false);
                     }
                     else {
@@ -93,7 +93,7 @@ function Login() {
                     }
                 }
             } catch (error) {
-                setError(body);
+                console.log(error)
             }
         }
         else return setError('Passwords do not match');
@@ -119,16 +119,17 @@ function Login() {
             if (body.accessToken.length > 0) {
                 setToken(body.accessToken);
                 setAdministrator(false);
-                setTimeout(()=>{
+                setTimeout(() => {
                     window.location.href = 'https://pet-project-itc.herokuapp.com/';
-                },2000)
+                }, 2000)
                 setAdmin(false);
             }
             else {
                 setError(body);
             }
         } catch (error) {
-            setError2(body);
+            setError2('No account with that e-mail')
+            console.log(error)
         }
     }
 
