@@ -66,11 +66,10 @@ function AdminForm() {
             headers: headers
         })
             .then(res => {
-                console.log(res.data.id)
                 const data = new FormData();
                 data.append('file', e.target.files[0]);
                 data.append('id', parseInt(res.data));
-                axios.post(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/image_upload/${res.data.id}`, data, {
+                axios.post(`http://localhost:5001/image_upload/${res.data.id}`, data, {
                     headers: headers
                 }).then(res => {
                     setError(res.data);
@@ -155,7 +154,7 @@ function AdminForm() {
                                         <option></option>
                                         <option value='adopted'>Adopted</option>
                                         <option value='fostered'>Fostered</option>
-                                        <option value='none'>None of Above</option>
+                                        <option value='available'>None of Above</option>
                                     </Form.Control>
                                 </Form.Group>
                                 <Form.Group controlId="exampleForm.ControlSelect2">

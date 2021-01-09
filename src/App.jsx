@@ -114,10 +114,7 @@ function App() {
           <ProtectedRouteProfile path='/profile/:id' component={Profile} />
         </Switch>
         <Switch>
-          <Route path="/mypets">
-            <NavBar />
-            <MyPets />
-          </Route>
+          <ProtectedRouteProfile path="/mypets" component={MyPets}/>
         </Switch>
         <Switch>
           <Route path="/pet_page/:id" component={PetsPage}>

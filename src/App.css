@@ -8,7 +8,7 @@
 
  .main-div {
      position: relative;
-     left: 100%;
+     left: 60%;
  }
 
  .main {
@@ -67,13 +67,16 @@
      margin-left: 33%;
      padding-top: 15px;
  }
-
+.first-main{
+    position: relative;
+    left: 30%;
+}
  .banner {
      position: absolute;
      writing-mode: tb-rl;
      transform: rotate(-180deg);
      text-orientation: sideways;
-     left: 30%;
+     left: 10%;
      bottom: -90px;
      width: 100vh;
      height: 40px;
@@ -92,7 +95,7 @@
      position: absolute;
      writing-mode: vertical-rl;
      text-orientation: sideways;
-     right: -1100px;
+     left: 170%;
      top: 30px;
      width: 900px;
      height: 40px;

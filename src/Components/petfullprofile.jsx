@@ -85,7 +85,7 @@ function PetFullProfile(props) {
         e.target.files[0].id = id;
         data.append('file', e.target.files[0]);
         data.append('id', e.target.files[0].id);
-        axios.post(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/image_upload/${id}`, data, {
+        axios.post(`http://localhost:5001/image_upload/${id}`, data, {
             headers: headers
         });
     }
@@ -173,7 +173,7 @@ function PetFullProfile(props) {
                                         <option></option>
                                         <option value='adopted'>Adopted</option>
                                         <option value='fostered'>Fostered</option>
-                                        <option value='none'>None of Above</option>
+                                        <option value='available'>None of Above</option>
                                     </Form.Control>
                                 </Form.Group>
                                 <Form.Group controlId="exampleForm.ControlSelect2">

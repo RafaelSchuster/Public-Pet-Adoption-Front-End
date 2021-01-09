@@ -6,6 +6,7 @@ import '../App.css';
 import { MainContext } from '../Context/context';
 import PetCard from './petcard';
 import { getPetById } from '../Api/api'
+import NavBar from './navbar';
 
 const arrPets = [];
 
@@ -28,6 +29,7 @@ function MyPets() {
 
     return (
         <>
+        <NavBar/>
             <div>
                 <h1 className="header-profile mb-5"> Your Pets</h1>
             </div>
