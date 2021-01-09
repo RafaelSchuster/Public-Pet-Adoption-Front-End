@@ -5,6 +5,7 @@ import '../App.css';
 import axios from 'axios';
 import { MainContext } from '../Context/context';
 import NavBar from './navbar';
+import { app } from '../firebase/base';
 
 
 function AdminForm() {
@@ -60,21 +61,42 @@ function AdminForm() {
     const headers = {
         'Authorization': `Bearer ${token} `
     };
+    const db = app.firestore();
 
-    const imageHandler = (e) => {
-        axios.get(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/pet_id/${petName}/type/${type}`, {
-            headers: headers
-        })
-            .then(res => {
-                const data = new FormData();
-                data.append('file', e.target.files[0]);
-                data.append('id', parseInt(res.data));
-                axios.post(`http://localhost:5001/image_upload/${res.data.id}`, data, {
-                    headers: headers
-                }).then(res => {
-                    setError(res.data);
+    const imageHandler = async (e) => {
+        let petId;
+        try {
+            axios.get(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/pet_id/${petName}/type/${type}`, {
+                headers: headers
+            })
+                .then(res => {
+                    petId = res.data.id;
                 });
+        } catch (error) {
+            console.log(error);
+        }
+        const file = e.target.files[0];
+        const storageRef = app.storage().ref();
+        const fileRef = storageRef.child(file.name);
+        await fileRef.put(file)
+        const fileUrl = await fileRef.getDownloadURL()
+        console.log(await fileUrl)
+        try {
+            const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/image_url/${petId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ post: await fileUrl }),
             });
+            let body = await response.json();
+            setError(body);
+        } catch (error) {
+            console.log(error);
+        };
+
+
     };
 
     const petSubmitting = async (e) => {

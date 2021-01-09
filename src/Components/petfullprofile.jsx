@@ -6,6 +6,7 @@ import { getPetById } from '../Api/api';
 import axios from 'axios';
 import NavBar from './navbar';
 import { MainContext } from '../Context/context';
+import { app } from '../firebase/base';
 
 function PetFullProfile(props) {
     const [id, setId] = useState(props.match.params.id);
@@ -80,14 +81,27 @@ function PetFullProfile(props) {
         'Authorization': `Bearer ${token} `
     };
 
-    const imageHandler = (e) => {
-        const data = new FormData();
-        e.target.files[0].id = id;
-        data.append('file', e.target.files[0]);
-        data.append('id', e.target.files[0].id);
-        axios.post(`http://localhost:5001/image_upload/${id}`, data, {
-            headers: headers
-        });
+    const imageHandler = async (e) => {
+        const file = e.target.files[0];
+        const storageRef = app.storage().ref()
+        const fileRef = storageRef.child(file.name)
+        await fileRef.put(file)
+        const fileUrl = await fileRef.getDownloadURL()
+        console.log(await fileUrl)
+        try {
+            const response = await fetch(`https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/image_url/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ post: await fileUrl }),
+            });
+            let body = await response.json();
+            setError(body);
+        } catch (error) {
+            console.log(error);
+        };
     }
 
     const petSubmitting = async (e) => {

@@ -104,7 +104,7 @@ function AdminLogin() {
             password: password,
         };
         try {
-            const response = await fetch('http://localhost:5001/adminlogin', {
+            const response = await fetch('https://us-central1-pet-project-backend-9c241.cloudfunctions.net/app/adminlogin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -115,7 +115,7 @@ function AdminLogin() {
             if (body.accessToken.length > 0) {
                 setToken(body.accessToken);
                 setAdministrator(true);
-                window.location.href = 'http://localhost:5001/admin';
+                window.location.href = 'https://pet-project-itc.herokuapp.com/admin';
                 setRefresher(true);
             }
             else {

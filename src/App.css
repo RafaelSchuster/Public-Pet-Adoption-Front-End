@@ -70,7 +70,7 @@
  }
 .first-main{
     position: absolute;
-    left: 30%;
+    margin-left: 19vw;
 }
  .banner {
      position: absolute;
@@ -96,7 +96,7 @@
      position: absolute;
      writing-mode: vertical-rl;
      text-orientation: sideways;
-     left: 153%;
+     left: 148%;
      top: 25px;
      width: 900px;
      height: 40px;
