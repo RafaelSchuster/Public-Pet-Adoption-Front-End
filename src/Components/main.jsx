@@ -64,7 +64,7 @@ function Main() {
                 </Card>
             </div>
             <div className="banner-div"><div className="banner"><img src={logo} alt="" className="logo-banner" /><span className="banner-txt">Renta <span className="itc">PET</span> </span> </div></div>
-            {/* <div className="banner2"> <img src={logo} alt="" className="logo-banner" /><span className="banner-txt">Renta<span className="itc">PET</span></span></div>    */}
+            <div className="banner2"> <img src={logo} alt="" className="logo-banner" /><span className="banner-txt">Renta<span className="itc">PET</span></span></div>   
         </div>
     )
 }
